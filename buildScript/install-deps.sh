@@ -43,21 +43,20 @@ install_go() {
     if command -v go &>/dev/null; then
         local ver
         ver=$(go version | awk '{print $3}' | sed 's/go//')
-        local major="${ver%%.*}"
-        if [ -n "$major" ] && [ "$major" -ge 25 ] 2>/dev/null; then
+        # version-sort check: passes when ver >= GO_VERSION (e.g. 1.26.5 >= 1.25)
+        if [ -n "$ver" ] && [ "$(printf '%s\n' "$GO_VERSION" "$ver" | sort -V | head -1)" = "$GO_VERSION" ]; then
             echo ">> Go $ver already installed"
             return 0
         fi
+        echo ">> Go $ver found but Go $GO_VERSION+ is required"
     fi
 
     echo ">> Installing Go $GO_VERSION..."
-    if [ -f /etc/debian_version ]; then
-        apt-get update -qq
-        apt-get install -y -qq golang-go
-    else
-        curl -fsSL "https://go.dev/dl/go${GO_VERSION}.4.linux-amd64.tar.gz" | tar -C /usr/local -xz
-        export PATH="/usr/local/go/bin:$PATH"
-    fi
+    # Official tarball on all distros: apt repos ship Go versions that are
+    # too old for libcore/go.mod (requires go 1.25.0).
+    rm -rf /usr/local/go
+    curl -fsSL "https://go.dev/dl/go${GO_VERSION}.4.linux-amd64.tar.gz" | tar -C /usr/local -xz
+    export PATH="/usr/local/go/bin:$PATH"
     echo ">> Go installed: $(go version)"
 }
 

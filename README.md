@@ -35,7 +35,7 @@
 |-------|------------|
 | **Frontend** | Android, Kotlin, Material Design |
 | **Networking** | sing-box, libcore (Go bindings) |
-| **Native build** | Android NDK, Go 1.23, gomobile toolchain |
+| **Native build** | Android NDK, Go 1.25, gomobile toolchain |
 | **Build system** | Gradle (Kotlin DSL), buildSrc |
 | **CI/CD** | GitHub Actions |
 
