@@ -11,15 +11,19 @@ GRADLE       := ./gradlew
 GRADLE_FLAGS ?=
 
 .PHONY: help assets \
+        install-resources build-full \
         debug-oss debug-play debug-preview debug-all \
         release-oss release-play release-all \
-        clean lint build-full
+        clean lint
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-18s\033[0m %s\n", $$1, $$2}'
 
 assets: ## Download geoip/geosite databases to assets/sing-box/
 	bash buildScript/lib/assets.sh
+
+install-resources: ## Install all build prerequisites (JDK 21, Android SDK packages, Go)
+	bash buildScript/install-deps.sh
 
 build-full: ## Full build from scratch: clean → sources → libcore → assets → release APK
 	$(GRADLE) clean $(GRADLE_FLAGS)

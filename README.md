@@ -98,7 +98,7 @@ Or using the CLI helper directly:
 
 | Tool | Version |
 |------|---------|
-| JDK | 17+ (built & tested with 21) |
+| JDK | **21** (pinned; JDK 17 also accepted for Gradle) |
 | Android SDK | `platforms;android-36`, `build-tools;37.0.0` |
 | Android NDK | `29.0.14206865` |
 | Go | 1.25+ (go.mod requires 1.25.0) |
