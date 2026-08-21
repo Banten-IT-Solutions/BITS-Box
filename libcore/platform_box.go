@@ -124,8 +124,24 @@ func (w *boxPlatformInterfaceWrapper) NetworkInterfaces() ([]adapter.NetworkInte
 	}
 	// Go's net.Interfaces() issued RTM_GETLINK over netlink, which is EPERM
 	// for a normal Android app context. That leaves sing-box with no
-	// interface to dial from ("no available network interface"). Fall back to
-	// /sys/class/net, which is world-readable and needs no netlink.
+	// interface to dial from ("no available network interface"). Log the
+	// original error so device-specific netlink failures are visible.
+	log.Printf("net.Interfaces failed: %v; falling back", err)
+	// Second fallback: enumeration via ConnectivityManager on the Kotlin side
+	// (framework API, not blocked by SELinux), transported as JSON because
+	// gomobile only binds primitive types.
+	if intfBox != nil {
+		if raw := intfBox.NetworkInterfacesJSON(); raw != "" {
+			interfaces, jsonErr := parsePlatformInterfacesJSON(raw)
+			if jsonErr == nil {
+				return interfaces, nil
+			}
+			log.Printf("platform interfaces JSON parse failed: %v; falling back to procfs", jsonErr)
+		}
+	}
+	// Last fallback: /sys/class/net, which needs no netlink. On devices with
+	// strict SELinux this may also be denied, but it is the only source left
+	// and still serves desktop/non-Android builds.
 	pfIfs, err := procfs.NetworkInterfaces()
 	if err != nil {
 		return nil, err
@@ -138,6 +154,77 @@ func (w *boxPlatformInterfaceWrapper) NetworkInterfaces() ([]adapter.NetworkInte
 		})
 	}
 	return interfaces, nil
+}
+
+// platformInterfaceEntry is one element of the JSON array produced by the
+// Kotlin side (NativeInterface.networkInterfacesJSON).
+type platformInterfaceEntry struct {
+	Name    string   `json:"name"`
+	Index   int      `json:"index"`
+	MTU     int      `json:"mtu"`
+	Type    string   `json:"type"`
+	Flags   uint32   `json:"flags"`
+	DNS     []string `json:"dns"`
+	Metered bool     `json:"metered"`
+}
+
+func parsePlatformInterfacesJSON(raw string) ([]adapter.NetworkInterface, error) {
+	var entries []platformInterfaceEntry
+	if err := json.Unmarshal([]byte(raw), &entries); err != nil {
+		return nil, err
+	}
+	interfaces := make([]adapter.NetworkInterface, 0, len(entries))
+	for _, entry := range entries {
+		// Name+index are the minimum fields sing-box needs to select and
+		// bind an interface; skip incomplete entries and our own TUN.
+		if entry.Name == "" || entry.Index <= 0 || isVirtualInterfaceName(entry.Name) {
+			continue
+		}
+		interfaceType, ok := C.StringToInterfaceType[entry.Type]
+		if !ok {
+			interfaceType = networkInterfaceType(entry.Name)
+		}
+		interfaces = append(interfaces, adapter.NetworkInterface{
+			Interface: control.Interface{
+				Index: entry.Index,
+				Name:  entry.Name,
+				MTU:   entry.MTU,
+				Flags: linkFlags(entry.Flags),
+			},
+			Type:       interfaceType,
+			DNSServers: entry.DNS,
+			Expensive:  entry.Metered,
+		})
+	}
+	if len(interfaces) == 0 {
+		return nil, E.New("no usable interfaces in platform JSON")
+	}
+	return interfaces, nil
+}
+
+// linkFlags converts raw IFF_* kernel flags (as sent by the Kotlin side via
+// OsConstants) to net.Flags. Copied from sing-box libbox.
+func linkFlags(rawFlags uint32) net.Flags {
+	var f net.Flags
+	if rawFlags&syscall.IFF_UP != 0 {
+		f |= net.FlagUp
+	}
+	if rawFlags&syscall.IFF_RUNNING != 0 {
+		f |= net.FlagRunning
+	}
+	if rawFlags&syscall.IFF_BROADCAST != 0 {
+		f |= net.FlagBroadcast
+	}
+	if rawFlags&syscall.IFF_LOOPBACK != 0 {
+		f |= net.FlagLoopback
+	}
+	if rawFlags&syscall.IFF_POINTOPOINT != 0 {
+		f |= net.FlagPointToPoint
+	}
+	if rawFlags&syscall.IFF_MULTICAST != 0 {
+		f |= net.FlagMulticast
+	}
+	return f
 }
 
 func networkInterfaceType(name string) C.InterfaceType {

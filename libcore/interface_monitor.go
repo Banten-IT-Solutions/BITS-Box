@@ -2,6 +2,7 @@ package libcore
 
 import (
 	"log"
+	"net"
 	"strings"
 	"sync"
 	"time"
@@ -15,13 +16,19 @@ import (
 var (
 	defaultInterfaceMonitor       *interfaceMonitor
 	defaultInterfaceMonitorAccess sync.Mutex
-	// pendingDefaultInterface caches the last default-interface name reported
-	// by the app before any box instance registered a monitor. Without this,
-	// callbacks arriving between Libcore.initCore and box.Start (the common
-	// case, since BaseService.preInit starts the network listener first) are
-	// silently dropped and the box would start with no default interface.
-	pendingDefaultInterface string
+	// pendingDefaultInterface caches the last default-interface report
+	// (name and ifindex) from the app before any box instance registered a
+	// monitor. Without this, callbacks arriving between Libcore.initCore and
+	// box.Start (the common case, since BaseService.preInit starts the
+	// network listener first) are silently dropped and the box would start
+	// with no default interface.
+	pendingDefaultInterface pendingInterface
 )
+
+type pendingInterface struct {
+	name  string
+	index int32
+}
 
 // isVirtualInterfaceName reports whether name looks like a virtual/VPN
 // interface. Our own TUN must never become the default interface: sing-box's
@@ -53,7 +60,7 @@ func (s *interfaceMonitor) Start() error {
 	defaultInterfaceMonitorAccess.Lock()
 	defaultInterfaceMonitor = s
 	pending := pendingDefaultInterface
-	pendingDefaultInterface = ""
+	pendingDefaultInterface = pendingInterface{}
 	defaultInterfaceMonitorAccess.Unlock()
 	// Populate the platform interface list as early as possible so the
 	// parallel-interface dialer has usable interfaces even before the app
@@ -74,15 +81,19 @@ func (s *interfaceMonitor) Start() error {
 	log.Println("interface_monitor Start: available network interfaces: ", strings.Join(names, ", "))
 	// myInterfaces excludes the TUN device from dialing candidates.
 	log.Println("interface_monitor Start: myInterfaces (excluded): ", s.myInterfaces)
-	// Prefer the live platform answer, fall back to the name cached before
+	// Prefer the live platform answer, fall back to the report cached before
 	// this monitor existed. A virtual (TUN) name is rejected: it would leave
 	// selectInterfaces with zero candidates.
 	interfaceName := intfBox.DefaultInterfaceName()
+	interfaceIndex := int32(-1)
 	if interfaceName == "" {
-		interfaceName = pending
+		interfaceName = pending.name
+		interfaceIndex = pending.index
+	} else {
+		interfaceIndex = resolveInterfaceIndex(s.platformInterface, interfaceName, -1)
 	}
 	if interfaceName != "" && !isVirtualInterfaceName(interfaceName) {
-		UpdateDefaultInterface(interfaceName)
+		UpdateDefaultInterface(interfaceName, interfaceIndex)
 	} else {
 		// The physical network callback has not fired yet (or only reported
 		// our own TUN). Poll briefly instead of leaving the box without a
@@ -93,13 +104,28 @@ func (s *interfaceMonitor) Start() error {
 				time.Sleep(500 * time.Millisecond)
 				name := intfBox.DefaultInterfaceName()
 				if name != "" && !isVirtualInterfaceName(name) {
-					UpdateDefaultInterface(name)
+					UpdateDefaultInterface(name, resolveInterfaceIndex(s.platformInterface, name, -1))
 					return
 				}
 			}
 		}()
 	}
 	return nil
+}
+
+// resolveInterfaceIndex maps an interface name to its ifindex using the
+// platform interface list (ConnectivityManager JSON / procfs cache). Returns
+// fallback when the name cannot be resolved; callers must still accept the
+// update with an unknown index instead of dropping it.
+func resolveInterfaceIndex(w *boxPlatformInterfaceWrapper, interfaceName string, fallback int32) int32 {
+	if w != nil && w.networkManager != nil {
+		if finder := w.networkManager.InterfaceFinder(); finder != nil {
+			if iif, err := finder.ByName(interfaceName); err == nil && iif.Index > 0 {
+				return int32(iif.Index)
+			}
+		}
+	}
+	return fallback
 }
 
 func (s *interfaceMonitor) Close() error {
@@ -109,13 +135,15 @@ func (s *interfaceMonitor) Close() error {
 	}
 	s.access.Lock()
 	var lastName string
+	var lastIndex int32
 	if s.defaultInterface != nil {
 		lastName = s.defaultInterface.Name
+		lastIndex = int32(s.defaultInterface.Index)
 	}
 	s.access.Unlock()
-	// Keep the last known good name for the next Start in this process
+	// Keep the last known good report for the next Start in this process
 	// (service restarts reuse the same Go runtime).
-	pendingDefaultInterface = lastName
+	pendingDefaultInterface = pendingInterface{name: lastName, index: lastIndex}
 	defaultInterfaceMonitorAccess.Unlock()
 	return nil
 }
@@ -172,7 +200,9 @@ func (s *interfaceMonitor) isMyInterface(name string) bool {
 }
 
 // UpdateDefaultInterface receives Android ConnectivityManager updates.
-func UpdateDefaultInterface(interfaceName string) {
+// interfaceIndex is the ifindex resolved on the Kotlin side
+// (java.net.NetworkInterface); it may be -1 when resolution failed.
+func UpdateDefaultInterface(interfaceName string, interfaceIndex int32) {
 	// Never accept a virtual/VPN interface (especially our own TUN) as the
 	// default: see isVirtualInterfaceName. Empty names are also ignored here
 	// so a transient "network lost" report cannot clear a working default.
@@ -184,7 +214,7 @@ func UpdateDefaultInterface(interfaceName string) {
 	if monitor == nil {
 		// Box not started yet: cache the report so interfaceMonitor.Start
 		// can apply it instead of silently dropping it.
-		pendingDefaultInterface = interfaceName
+		pendingDefaultInterface = pendingInterface{name: interfaceName, index: interfaceIndex}
 		defaultInterfaceMonitorAccess.Unlock()
 		return
 	}
@@ -201,24 +231,44 @@ func UpdateDefaultInterface(interfaceName string) {
 		}
 	}
 	monitor.access.Lock()
-	// interfaceName is guaranteed non-empty and physical here. Resolve it
-	// without netlink (RTM_GETLINK is EPERM for normal Android apps): prefer
-	// the interfaceFinder cache (populated by UpdateInterfaces above via
-	// procfs), then fall back to a direct /sys/class/net lookup.
+	// interfaceName is guaranteed non-empty and physical here. Resolve the
+	// full interface without netlink (RTM_GETLINK is EPERM for normal
+	// Android apps): prefer the interfaceFinder cache (populated by
+	// UpdateInterfaces above via the ConnectivityManager JSON or procfs),
+	// then a direct /sys/class/net lookup. Both are best-effort: when they
+	// fail, the report from the app (name + index) is authoritative and the
+	// update must NOT be dropped — dropping a valid default interface leaves
+	// the dialer without candidates ("no available network interface").
 	var interfaceValue control.Interface
 	if monitor.platformInterface != nil && monitor.platformInterface.networkManager != nil {
 		if finder := monitor.platformInterface.networkManager.InterfaceFinder(); finder != nil {
 			if iif, finderErr := finder.ByName(interfaceName); finderErr == nil {
 				interfaceValue = *iif
+			} else if interfaceIndex > 0 {
+				if iif, finderErr = finder.ByIndex(int(interfaceIndex)); finderErr == nil {
+					interfaceValue = *iif
+				}
 			}
 		}
 	}
 	if interfaceValue.Name == "" {
 		if iif, ok := procfs.InterfaceByName(interfaceName); ok {
 			interfaceValue = iif
+		} else if interfaceIndex > 0 {
+			// No kernel access available (strict SELinux): build the
+			// interface directly from the app report.
+			interfaceValue = control.Interface{
+				Index: int(interfaceIndex),
+				Name:  interfaceName,
+				Flags: net.FlagUp,
+			}
 		} else {
-			monitor.access.Unlock()
-			return
+			// Name only, index unknown. Still set the default so the dialer
+			// has a candidate; Index stays 0.
+			interfaceValue = control.Interface{
+				Name:  interfaceName,
+				Flags: net.FlagUp,
+			}
 		}
 	}
 	if monitor.defaultInterface != nil &&
@@ -230,6 +280,7 @@ func UpdateDefaultInterface(interfaceName string) {
 	monitor.defaultInterface = updated
 	callbacks := monitor.callbacks.Array()
 	monitor.access.Unlock()
+	log.Println("interface_monitor: default interface updated: ", updated.Name, " (", updated.Index, ")")
 	for _, callback := range callbacks {
 		callback(updated, 0)
 	}

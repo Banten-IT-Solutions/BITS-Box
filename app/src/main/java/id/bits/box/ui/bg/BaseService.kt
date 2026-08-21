@@ -24,6 +24,7 @@ import kotlinx.coroutines.sync.withLock
 import libcore.Libcore
 import id.bits.box.Protocols
 import id.bits.box.utils.Util
+import java.net.NetworkInterface
 import java.net.UnknownHostException
 
 class BaseService {
@@ -286,7 +287,14 @@ class BaseService {
                 val oldName = upstreamInterfaceName
                 if (oldName != interfaceName) {
                     upstreamInterfaceName = interfaceName
-                    Libcore.updateDefaultInterface(interfaceName ?: "")
+                    // Resolve the ifindex here (java.net.NetworkInterface,
+                    // no netlink/procfs needed) so libcore never has to map
+                    // name -> index itself: on strict-SELinux devices both
+                    // kernel paths are denied. -1 keeps the old behavior.
+                    val interfaceIndex = interfaceName?.let { name ->
+                        runCatching { NetworkInterface.getByName(name)?.index }.getOrNull()
+                    } ?: -1
+                    Libcore.updateDefaultInterface(interfaceName ?: "", interfaceIndex)
                 }
                 if (oldName != null && interfaceName != null && oldName != interfaceName) {
                     Logs.d("Network changed: $oldName -> $interfaceName")
