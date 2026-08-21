@@ -13,13 +13,20 @@ GRADLE_FLAGS ?=
 .PHONY: help assets \
         debug-oss debug-play debug-preview debug-all \
         release-oss release-play release-all \
-        clean lint
+        clean lint build-full
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-18s\033[0m %s\n", $$1, $$2}'
 
 assets: ## Download geoip/geosite databases to assets/sing-box/
 	bash buildScript/lib/assets.sh
+
+build-full: ## Full build from scratch: clean → sources → libcore → assets → release APK
+	$(GRADLE) clean $(GRADLE_FLAGS)
+	bash buildScript/lib/core/init.sh
+	bash buildScript/lib/core/build.sh
+	bash buildScript/lib/assets.sh
+	$(GRADLE) assembleOssRelease $(GRADLE_FLAGS)
 
 # --- Debug builds ----------------------------------------------------------
 

@@ -63,8 +63,8 @@ BITS-Box/
 ### Build locally
 
 ```bash
-# 1. Fetch pinned external sources for libcore
-./run lib core get source
+# 1. Fetch pinned external sources + init gomobile toolchain
+./run lib core init
 
 # 2. Build native core library (bitscore.aar)
 ./run lib core build
@@ -73,20 +73,35 @@ BITS-Box/
 ./run lib assets
 
 # 4. Build APK
-./gradlew assemblePreviewDebug        # debug, unsigned
-./gradlew assemblePreviewRelease      # release, signed (needs keystore)
+make debug-oss        # debug, unsigned
+make release-oss      # release, unsigned (signed with keystore if configured)
 ```
 
 Artifacts are written to `app/build/outputs/apk/`.
+
+### Full build from scratch
+
+```bash
+make build-full      # clean → fetch sources → init → build libcore → assets → release APK
+```
+
+Or using the CLI helper directly:
+
+```bash
+./run lib core init    # fetch sources + gomobile init
+./run lib core build   # build bitscore.aar
+./run lib assets       # download GeoIP/GeoSite
+./gradlew assembleOssRelease  # build APK
+```
 
 ### Prerequisites
 
 | Tool | Version |
 |------|---------|
 | JDK | 17+ (built & tested with 21) |
-| Android SDK | `platforms;android-35`, `build-tools;35.0.1` |
-| Android NDK | `28.0.13004108` |
-| Go | 1.23+ |
+| Android SDK | `platforms;android-36`, `build-tools;37.0.0` |
+| Android NDK | `29.0.14206865` |
+| Go | 1.25+ (go.mod requires 1.25.0) |
 
 ## ⚙️ Configuration
 

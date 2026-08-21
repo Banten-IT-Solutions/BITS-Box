@@ -42,11 +42,12 @@ fun Project.requireLocalProperties(): Properties {
 
 fun Project.setupCommon() {
     android.apply {
-        buildToolsVersion = "36.0.0"
+        buildToolsVersion = "37.0.0"
+        ndkVersion = "29.0.14206865"
         compileSdk = 36
         defaultConfig {
-            minSdk = 23
-            targetSdk = 35
+            minSdk = 29
+            targetSdk = 36
         }
         buildTypes {
             getByName("release") {
