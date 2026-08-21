@@ -9,6 +9,6 @@
     <item
         android:id="@+id/close"
         android:icon="@drawable/ic_navigation_close"
-        android:title="@string/mal_close"
+        android:title="@string/action_close"
         app:showAsAction="ifRoom" />
 </menu>

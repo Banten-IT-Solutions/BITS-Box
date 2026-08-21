@@ -32,9 +32,6 @@
 -keep public class * extends com.google.gson.JsonDeserializer
 -keep public class * extends com.google.gson.JsonSerializer
 
-# ini4j
--keep public class org.ini4j.spi.** { <init>(); }
-
 # SnakeYaml
 -keep class org.yaml.snakeyaml.** { *; }
 
@@ -47,9 +44,6 @@
 
 # ZXing
 -keep class com.google.zxing.** { *; }
-
-# Material About Library
--keep class com.github.daniel-stoneuk.materialaboutlibrary.** { *; }
 
 # EditorKit
 -keep class com.blacksquircle.ui.** { *; }

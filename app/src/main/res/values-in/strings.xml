@@ -352,6 +352,7 @@
     <string name="custom_config_json">JSON konfigurasi kustom</string>
     <string name="is_outbound_only">JSON yang diset adalah keluaran</string>
     <string name="set_panel_url">Atur URL panel</string>
+    <string name="action_close">Tutup</string>
     <string name="enable_clash_api">Aktifkan API Clash</string>
     <string name="log_level">Level log</string>
     <string name="enable_clash_api_summary">Sediakan API clash dan dasbor yacd di 127.0.0.1:9090</string>
