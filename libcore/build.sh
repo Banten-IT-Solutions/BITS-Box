@@ -14,7 +14,7 @@ if [ -z "$GOPATH" ]; then
 fi
 
 export GOBIND=gomobile-bits
-"$GOPATH"/bin/gomobile-bits bind -v -androidapi 21 -trimpath -ldflags='-s -w' -tags=with_conntrack,with_gvisor,with_utls,with_clash_api . || exit 1
+"$GOPATH"/bin/gomobile-bits bind -v -target=android/arm,android/arm64 -androidapi 21 -trimpath -ldflags='-s -w' -tags=with_conntrack,with_gvisor,with_utls,with_clash_api . || exit 1
 rm -r libcore-sources.jar
 
 # Rename output aar from libcore.aar → bitscore.aar
