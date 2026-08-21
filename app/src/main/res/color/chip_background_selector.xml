@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Chip background selector for route list -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Selected/checked state with primary color 24% opacity -->
+    <item android:alpha="0.24" android:color="?attr/colorPrimary" android:state_selected="true" />
+    <item android:alpha="0.24" android:color="?attr/colorPrimary" android:state_checked="true" />
+    <!-- Default state with surface color 10% opacity -->
+    <item android:alpha="0.10" android:color="?attr/colorSurfaceVariant" />
+</selector>

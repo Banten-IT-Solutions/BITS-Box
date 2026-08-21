@@ -1,0 +1,723 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. BITS Box Professional -->
+    <style name="Theme.BITSBox" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="actionBarStyle">@style/Widget.MaterialComponents.ActionBar.Solid</item>
+        <item name="actionModeCloseDrawable">@drawable/ic_navigation_close</item>
+        <item name="colorButtonNormal">?colorAccent</item>
+        <item name="android:navigationBarColor">?attr/colorPrimaryVariant</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_variant</item>
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorOnSecondary">@color/onSecondary</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <item name="colorMaterial100">@color/material_blue_grey_100</item>
+        <item name="colorMaterial300">@color/material_blue_grey_300</item>
+
+        <item name="accentOrTextSecondary">?colorSecondary</item>
+        <item name="accentOrTextPrimary">?colorSecondary</item>
+        <item name="primaryOrTextSecondary">?colorPrimary</item>
+        <item name="primaryOrTextPrimary">?colorOnPrimary</item>
+
+        <item name="fabColorBackground">?attr/colorPrimary</item>
+        <item name="selectedColorPrimary">?attr/colorPrimary</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+        <item name="popupMenuStyle">@style/Widget.BITSBox.PopupMenu</item>
+        <item name="actionOverflowMenuStyle">@style/Widget.BITSBox.PopupMenu.Overflow</item>
+        <item name="textAppearanceSmallPopupMenu">@style/TextAppearance.BITSBox.PopupMenu</item>
+        <item name="textAppearanceLargePopupMenu">@style/TextAppearance.BITSBox.PopupMenu</item>
+        <item name="listMenuViewStyle">@style/Widget.BITSBox.ListMenuView</item>
+        <item name="colorControlNormal">?attr/mainIconText</item>
+        <item name="colorControlActivated">?attr/mainIconText</item>
+        <item name="android:colorControlNormal">?attr/mainIconText</item>
+        <item name="android:colorControlActivated">?attr/mainIconText</item>
+        <item name="spinnerStyle">@style/Widget.BITSBox.Spinner</item>
+        <item name="android:dropDownListViewStyle">@style/Widget.BITSBox.DropDownListView</item>
+        <item name="android:popupBackground">@drawable/bg_popup_window</item>
+        <item name="android:popupAnimationStyle">@anim/bitsbox_popup_enter</item>
+        <item name="tabTextColor">?colorOnPrimary</item>
+        <item name="tabSelectedTextColor">?colorOnPrimary</item>
+        <item name="tabIndicatorColor">?colorOnPrimary</item>
+        <item name="tabRippleColor">?colorOnPrimary</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="29">false</item>
+        <item name="whiteOrTextPrimary">?colorOnPrimary</item>
+        <item name="mainIconText">@color/white</item>
+        <item name="ContentIconText">@color/black</item>
+
+        <item name="windowActionModeOverlay">true</item>
+
+        <!-- Remove ActionBar but keep styles and themes -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <item name="chipStyle">@style/Widget.MaterialComponents.Chip.Choice.BITSBox</item>
+
+        <!-- Global switch style: force thumb/track to theme colors via our selectors.
+             Material3's default switchStyle tints the checked TRACK with
+             ?attr/colorPrimaryContainer, which this app does not define, so it
+             falls back to the bluish Material3 baseline. Overriding switchStyle
+             guarantees every SwitchCompat (including preference switches, whose
+             widget has no explicit style) uses our theme-aware selectors. -->
+        <item name="switchStyle">@style/Widget.BITSBox.CompoundButton.Switch</item>
+        <item name="android:switchStyle">@style/Widget.BITSBox.CompoundButton.Switch</item>
+
+        <item name="itemShapeAppearance">
+            @style/ShapeAppearance.MaterialComponents.MediumComponent
+        </item>
+
+        <item name="alertDialogTheme">
+            @style/ThemeOverlay.MaterialComponents.MaterialAlertDialog.BITSBox
+        </item>
+
+        <item name="materialAlertDialogTheme">
+            @style/ThemeOverlay.MaterialComponents.MaterialAlertDialog.BITSBox
+        </item>
+
+        <item name="preferenceTheme">@style/PreferenceTheme.BITSBox</item>
+
+    </style>
+
+    <!-- Preference screens: icons + text use ContentIconText for surface contrast -->
+    <!-- Parent Theme.BITSBox so ?attr/ContentIconText resolves; carry BasePreferenceThemeOverlay items -->
+    <style name="PreferenceTheme.BITSBox" parent="Theme.BITSBox">
+        <item name="checkBoxPreferenceStyle">@style/Preference.CheckBoxPreference.Material</item>
+        <item name="dialogPreferenceStyle">@style/Preference.DialogPreference.Material</item>
+        <item name="dropdownPreferenceStyle">@style/Preference.DropDown.BITSBox</item>
+        <item name="editTextPreferenceStyle">@style/Preference.DialogPreference.EditTextPreference.BITSBox</item>
+        <item name="preferenceCategoryStyle">@style/Preference.Category.Material</item>
+        <item name="preferenceFragmentCompatStyle">@style/PreferenceFragment.Material</item>
+        <item name="preferenceFragmentListStyle">@style/PreferenceFragmentList.Material</item>
+        <item name="preferenceFragmentStyle">@style/PreferenceFragment.Material</item>
+        <item name="preferenceScreenStyle">@style/Preference.PreferenceScreen.Material</item>
+        <item name="preferenceStyle">@style/Preference.Material</item>
+        <item name="seekBarPreferenceStyle">@style/Preference.SeekBarPreference.Material</item>
+        <item name="switchPreferenceCompatStyle">@style/Preference.SwitchPreferenceCompat.BITSBox</item>
+        <item name="switchPreferenceStyle">@style/Preference.SwitchPreference.Material</item>
+        <item name="preferenceCategoryTitleTextAppearance">@style/TextAppearance.AppCompat.Body2</item>
+        <item name="preferenceCategoryTitleTextColor">?attr/colorPrimary</item>
+        <item name="ContentIconText">@color/black</item>
+        <item name="android:textColorPrimary">?attr/ContentIconText</item>
+        <item name="android:textColorSecondary">?attr/ContentIconText</item>
+        <item name="colorControlActivated">?attr/colorPrimary</item>
+        <item name="android:colorControlActivated">?attr/colorPrimary</item>
+        <item name="colorSecondary">?attr/colorPrimary</item>
+        <item name="colorOnSecondary">?attr/colorPrimary</item>
+        <item name="colorSecondaryContainer">?attr/mainIconText</item>
+        <item name="colorOnSecondaryContainer">?attr/ContentIconText</item>
+    </style>
+
+    <!-- Modern EditTextPreference dialog: OutlinedBox input for every text preference -->
+    <style name="Preference.DialogPreference.EditTextPreference.BITSBox"
+        parent="Preference.DialogPreference.EditTextPreference.Material">
+        <item name="android:dialogLayout">@layout/layout_preference_edittext_dialog</item>
+    </style>
+
+    <!-- Dropdown row uses a ContentFitSpinner so long selected values are not clipped -->
+    <style name="Preference.DropDown.BITSBox" parent="Preference.DropDown.Material">
+        <item name="android:layout">@layout/preference_dropdown</item>
+    </style>
+
+    <!-- Custom switch style: thumb/track use ColorStateList selectors -->
+    <style name="Widget.BITSBox.CompoundButton.Switch" parent="Widget.Material3.CompoundButton.Switch">
+        <item name="thumbTint">@color/switch_thumb</item>
+        <item name="trackTint">@color/switch_track</item>
+    </style>
+
+    <!-- Custom switch style: thumb/track use ColorStateList selectors -->
+    <style name="Preference.SwitchPreferenceCompat.BITSBox" parent="Preference.SwitchPreferenceCompat.Material">
+        <item name="android:thumbTint">@color/switch_thumb</item>
+        <item name="android:trackTint">@color/switch_track</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog" parent="Theme.Material3.DayNight.Dialog.Alert">
+        <item name="actionBarStyle">@style/Widget.MaterialComponents.ActionBar.Solid</item>
+        <item name="actionModeCloseDrawable">@drawable/ic_navigation_close</item>
+        <item name="colorButtonNormal">?colorAccent</item>
+        <item name="android:navigationBarColor">?attr/colorPrimaryVariant</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_variant</item>
+        <item name="colorSecondary">@color/secondary</item>
+
+        <item name="colorMaterial100">@color/material_blue_grey_100</item>
+        <item name="colorMaterial300">@color/material_blue_grey_300</item>
+
+        <item name="accentOrTextSecondary">?colorSecondary</item>
+        <item name="accentOrTextPrimary">?colorSecondary</item>
+        <item name="primaryOrTextSecondary">?colorPrimary</item>
+        <item name="primaryOrTextPrimary">?colorOnPrimary</item>
+
+        <item name="fabColorBackground">?attr/colorPrimary</item>
+        <item name="selectedColorPrimary">?attr/colorPrimary</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+        <item name="tabTextColor">?colorOnPrimary</item>
+        <item name="tabSelectedTextColor">?colorOnPrimary</item>
+        <item name="tabIndicatorColor">?colorOnPrimary</item>
+        <item name="tabRippleColor">?colorOnPrimary</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="29">false</item>
+        <item name="whiteOrTextPrimary">@color/white</item>
+
+        <item name="windowActionModeOverlay">true</item>
+
+        <!-- Remove ActionBar but keep styles and themes -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <item name="chipStyle">@style/Widget.MaterialComponents.Chip.Choice.BITSBox</item>
+
+        <item name="itemShapeAppearance">
+            @style/ShapeAppearance.MaterialComponents.MediumComponent
+        </item>
+
+        <item name="alertDialogTheme">
+            @style/ThemeOverlay.MaterialComponents.MaterialAlertDialog.BITSBox
+        </item>
+
+        <item name="materialAlertDialogTheme">
+            @style/ThemeOverlay.MaterialComponents.MaterialAlertDialog.BITSBox
+        </item>
+
+        <item name="windowFixedHeightMajor" type="dimen">95%</item>
+
+        <item name="preferenceTheme">@style/PreferenceTheme.BITSBox</item>
+
+    </style>
+
+    <style name="AppearanceFoundation.Title" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ThemeOverlay.BITSBox.Light.ActionBar" parent="ThemeOverlay.AppCompat">
+        <item name="android:textColorPrimary">?attr/mainIconText</item>
+        <item name="android:textColorSecondary">?attr/mainIconText</item>
+        <item name="colorControlNormal">?attr/mainIconText</item>
+        <item name="android:windowBackground">?attr/colorPrimary</item>
+    </style>
+
+    <style name="ThemeOverlay.BITSBox.Dark.ActionBar" parent="ThemeOverlay.AppCompat">
+        <item name="android:textColorPrimary">?attr/mainIconText</item>
+        <item name="android:textColorSecondary">?attr/mainIconText</item>
+        <item name="colorControlNormal">?attr/mainIconText</item>
+        <item name="android:windowBackground">?attr/colorPrimary</item>
+    </style>
+
+    <style name="ThemeOverlay.BITSBox.PopupMenu" parent="ThemeOverlay.AppCompat.DayNight">
+        <item name="android:popupBackground">@drawable/bg_popup_window</item>
+        <item name="android:popupAnimationStyle">@anim/bitsbox_popup_enter</item>
+        <item name="popupMenuStyle">@style/Widget.BITSBox.PopupMenu</item>
+        <item name="actionOverflowMenuStyle">@style/Widget.BITSBox.PopupMenu.Overflow</item>
+        <item name="textAppearanceSmallPopupMenu">@style/TextAppearance.BITSBox.PopupMenu</item>
+        <item name="textAppearanceLargePopupMenu">@style/TextAppearance.BITSBox.PopupMenu</item>
+        <item name="listMenuViewStyle">@style/Widget.BITSBox.ListMenuView</item>
+        <item name="colorControlNormal">?attr/mainIconText</item>
+        <item name="colorControlActivated">?attr/mainIconText</item>
+        <item name="android:colorControlNormal">?attr/mainIconText</item>
+        <item name="android:colorControlActivated">?attr/mainIconText</item>
+        <item name="android:dropDownListViewStyle">@style/Widget.BITSBox.DropDownListView</item>
+    </style>
+
+    <style name="Widget.BITSBox.PopupMenu" parent="Widget.MaterialComponents.PopupMenu">
+        <item name="android:popupBackground">@drawable/bg_popup_window</item>
+        <item name="android:popupAnimationStyle">@anim/bitsbox_popup_enter</item>
+        <item name="itemTextColor">?attr/ContentIconText</item>
+        <item name="android:popupElevation">0dp</item>
+        <item name="android:windowBackground">@drawable/bg_popup_menu</item>
+    </style>
+
+    <!-- App bar overflow: drops down from the toolbar, so only the bottom
+         corners are rounded (square top edge connects to the app bar). -->
+    <style name="Widget.BITSBox.PopupMenu.Overflow" parent="Widget.BITSBox.PopupMenu">
+        <item name="android:dropDownHorizontalOffset">-8dp</item>
+        <item name="android:dropDownVerticalOffset">8dp</item>
+        <item name="android:popupBackground">@drawable/bg_popup_window_bottom_rounded</item>
+        <item name="android:windowBackground">@drawable/bg_popup_menu_bottom_rounded</item>
+    </style>
+
+    <!-- App bar submenu dropdowns (anchored to the toolbar, e.g. manual
+         settings / order menus): only bottom corners rounded. -->
+    <style name="Widget.BITSBox.PopupMenu.AppBar" parent="Widget.BITSBox.PopupMenu">
+        <item name="android:popupBackground">@drawable/bg_popup_window_bottom_rounded</item>
+        <item name="android:windowBackground">@drawable/bg_popup_menu_bottom_rounded</item>
+    </style>
+
+    <!-- Bottom nav "More": pops up from the bottom navigation bar, so only
+         the top corners are rounded (square bottom edge connects to the bar).
+         No vertical offset: the popup bottom must sit flush against the bar. -->
+    <style name="Widget.BITSBox.PopupMenu.More" parent="Widget.BITSBox.PopupMenu">
+        <item name="android:dropDownHorizontalOffset">-8dp</item>
+        <item name="android:dropDownVerticalOffset">0dp</item>
+        <item name="android:popupBackground">@drawable/bg_popup_window_top_rounded</item>
+        <item name="android:windowBackground">@drawable/bg_popup_menu_top_rounded</item>
+    </style>
+
+    <!-- Share: nudge left only -->
+    <style name="Widget.BITSBox.PopupMenu.Share" parent="Widget.BITSBox.PopupMenu">
+        <item name="android:dropDownHorizontalOffset">-8dp</item>
+        <item name="android:dropDownVerticalOffset">0dp</item>
+    </style>
+
+    <style name="TextAppearance.BITSBox.PopupMenu" parent="TextAppearance.AppCompat.Widget.PopupMenu.Small">
+        <item name="android:textColor">?attr/mainIconText</item>
+    </style>
+
+    <style name="Widget.BITSBox.ListMenuView" parent="Widget.AppCompat.ListMenuView">
+        <item name="subMenuArrow">@drawable/ic_submenu_arrow</item>
+        <item name="android:itemTextAppearance">@style/TextAppearance.BITSBox.PopupMenu</item>
+    </style>
+
+    <style name="Widget.BITSBox.DropDownListView" parent="Widget.AppCompat.ListView">
+        <item name="android:background">@drawable/bg_dropdown_popup</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <!-- No horizontal padding: items are measured at full width by
+             Spinner.measureContentWidth, so any list padding would clip the
+             widest item (e.g. "HTTP Upgrade" -> "HTTP Upg..."). Items already
+             carry their own 16dp start/end padding. -->
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:paddingEnd">0dp</item>
+        <!-- Items are full-width with opaque square backgrounds (SimpleMenuAdapter
+             colors each row), so without clipping they poke out past the 16dp
+             rounded corners of bg_dropdown_popup and the dropdown corners look
+             square / show an extra box. Clip the whole list to the rounded
+             background outline so rows are cut cleanly at the corners. -->
+        <item name="android:clipToOutline">true</item>
+        <item name="android:outlineProvider">background</item>
+        <item name="android:divider">@null</item>
+        <item name="android:dividerHeight">0dp</item>
+        <item name="android:listSelector">@drawable/bg_popup_menu</item>
+        <item name="android:cacheColorHint">?attr/colorPrimary</item>
+        <item name="android:scrollingCache">false</item>
+        <item name="android:animationCache">false</item>
+    </style>
+
+    <style name="Widget.BITSBox.Spinner" parent="Widget.AppCompat.Spinner">
+        <item name="android:popupBackground">@drawable/bg_dropdown_popup</item>
+        <item name="android:popupAnimationStyle">@anim/bitsbox_popup_enter</item>
+    </style>
+
+    <style name="Widget.BITSBox.BottomNav.NoIndicator" parent="">
+        <item name="android:width">0dp</item>
+        <item name="android:height">0dp</item>
+        <item name="marginHorizontal">0dp</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.BITSBox.StatsBar" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">0dp</item>
+    </style>
+
+    <style name="ThemeOverlay.MaterialComponents.MaterialAlertDialog.BITSBox">
+        <item name="shapeAppearanceOverlay">
+            @style/ShapeAppearanceOverlay.BITSBox.Dialog
+        </item>
+        <item name="buttonBarPositiveButtonStyle">
+            @style/Widget.MaterialComponents.Button.TextButton.Dialog.Primary
+        </item>
+        <item name="buttonBarNegativeButtonStyle">
+            @style/Widget.MaterialComponents.Button.TextButton.Dialog.Primary
+        </item>
+        <item name="buttonBarNeutralButtonStyle">
+            @style/Widget.MaterialComponents.Button.TextButton.Dialog.Flush.Primary
+        </item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.BITSBox.Dialog" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">28dp</item>
+    </style>
+
+    <style name="Widget.MaterialComponents.Button.TextButton.Dialog.Primary">
+        <item name="android:textColor">?colorPrimary</item>
+    </style>
+
+    <style name="Widget.MaterialComponents.Button.TextButton.Dialog.Flush.Primary">
+        <item name="android:textColor">?colorPrimary</item>
+    </style>
+
+    <style name="Widget.MaterialComponents.Chip.Choice.BITSBox">
+        <item name="textStartPadding">30dp</item>
+        <item name="textEndPadding">30dp</item>
+        <item name="chipBackgroundColor">@color/chip_background</item>
+        <item name="android:textColor">@color/chip_text_color</item>
+        <item name="checkedIconTint">?primaryOrTextPrimary</item>
+        <item name="rippleColor">@color/chip_ripple_color</item>
+    </style>
+
+    <style name="Theme.BITSBox.Pink_SSR" parent="Theme.BITSBox">
+        <item name="colorPrimary">@color/color_pink_ssr</item>
+        <item name="colorPrimaryDark">@color/color_pink_ssr</item>
+        <item name="colorSecondary">@color/color_pink_ssr</item>
+        <item name="colorAccent">@color/material_pink_accent_200</item>
+        <item name="colorMaterial100">@color/material_pink_accent_100</item>
+        <item name="colorMaterial300">@color/color_pink_ssr</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.BITSBox.Light.ActionBar</item>
+    </style>
+
+    <style name="Theme.BITSBox.Pink" parent="Theme.BITSBox">
+        <item name="colorPrimary">@color/material_pink_500</item>
+        <item name="colorPrimaryDark">@color/material_pink_500</item>
+        <item name="colorSecondary">@color/material_pink_500</item>
+        <item name="colorAccent">@color/material_pink_accent_200</item>
+        <item name="colorMaterial100">@color/material_pink_accent_100</item>
+        <item name="colorMaterial300">@color/material_pink_500</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.BITSBox.Light.ActionBar</item>
+    </style>
+
+    <style name="Theme.BITSBox.Amber" parent="Theme.BITSBox">
+        <item name="colorPrimary">@color/material_amber_500</item>
+        <item name="colorPrimaryDark">@color/material_amber_700</item>
+        <item name="colorAccent">@color/material_amber_accent_200</item>
+        <item name="colorMaterial100">@color/material_amber_100</item>
+        <item name="colorMaterial300">@color/material_amber_300</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.BITSBox.Light.ActionBar</item>
+    </style>
+
+    <style name="Theme.BITSBox.Blue" parent="Theme.BITSBox">
+        <item name="colorPrimary">@color/material_blue_500</item>
+        <item name="colorPrimaryDark">@color/material_blue_700</item>
+        <item name="colorAccent">@color/material_blue_accent_200</item>
+        <item name="colorMaterial100">@color/material_blue_100</item>
+        <item name="colorMaterial300">@color/material_blue_300</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.BITSBox.Light.ActionBar</item>
+    </style>
+
+    <style name="Theme.BITSBox.BlueGrey" parent="Theme.BITSBox">
+        <item name="colorPrimary">@color/material_blue_grey_500</item>
+        <item name="colorPrimaryDark">@color/material_blue_grey_700</item>
+        <item name="colorAccent">@color/material_blue_grey_200</item>
+        <item name="colorMaterial100">@color/material_blue_grey_100</item>
+        <item name="colorMaterial300">@color/material_blue_grey_300</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.BITSBox.Light.ActionBar</item>
+    </style>
+
+    <style name="Theme.BITSBox.Brown" parent="Theme.BITSBox">
+        <item name="colorPrimary">@color/material_brown_500</item>
+        <item name="colorPrimaryDark">@color/material_brown_700</item>
+        <item name="colorAccent">@color/material_brown_200</item>
+        <item name="colorMaterial100">@color/material_brown_100</item>
+        <item name="colorMaterial300">@color/material_brown_300</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.BITSBox.Light.ActionBar</item>
+    </style>
+
+    <style name="Theme.BITSBox.Cyan" parent="Theme.BITSBox">
+        <item name="colorPrimary">@color/material_cyan_500</item>
+        <item name="colorPrimaryDark">@color/material_cyan_700</item>
+        <item name="colorAccent">@color/material_cyan_accent_200</item>
+        <item name="colorMaterial100">@color/material_cyan_100</item>
+        <item name="colorMaterial300">@color/material_cyan_300</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.BITSBox.Light.ActionBar</item>
+    </style>
+
+    <style name="Theme.BITSBox.DeepOrange" parent="Theme.BITSBox">
+        <item name="colorPrimary">@color/material_deep_orange_500</item>
+        <item name="colorPrimaryDark">@color/material_deep_orange_700</item>
+        <item name="colorAccent">@color/material_deep_orange_accent_200</item>
+        <item name="colorMaterial100">@color/material_deep_orange_100</item>
+        <item name="colorMaterial300">@color/material_deep_orange_300</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.BITSBox.Light.ActionBar</item>
+    </style>
+
+    <style name="Theme.BITSBox.DeepPurple" parent="Theme.BITSBox">
+        <item name="colorPrimary">@color/material_deep_purple_500</item>
+        <item name="colorPrimaryDark">@color/material_deep_purple_700</item>
+        <item name="colorAccent">@color/material_deep_purple_accent_200</item>
+        <item name="colorMaterial100">@color/material_deep_purple_100</item>
+        <item name="colorMaterial300">@color/material_deep_purple_300</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.BITSBox.Light.ActionBar</item>
+    </style>
+
+    <style name="Theme.BITSBox.Green" parent="Theme.BITSBox">
+        <item name="colorPrimary">@color/material_green_500</item>
+        <item name="colorPrimaryDark">@color/material_green_700</item>
+        <item name="colorAccent">@color/material_green_accent_200</item>
+        <item name="colorMaterial100">@color/material_green_100</item>
+        <item name="colorMaterial300">@color/material_green_300</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.BITSBox.Light.ActionBar</item>
+    </style>
+
+    <style name="Theme.BITSBox.Grey" parent="Theme.BITSBox">
+        <item name="colorPrimary">@color/material_grey_500</item>
+        <item name="colorPrimaryDark">@color/material_grey_700</item>
+        <item name="colorAccent">@color/material_grey_200</item>
+        <item name="colorMaterial100">@color/material_grey_100</item>
+        <item name="colorMaterial300">@color/material_grey_300</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.BITSBox.Light.ActionBar</item>
+    </style>
+
+    <style name="Theme.BITSBox.Indigo" parent="Theme.BITSBox">
+        <item name="colorPrimary">@color/material_indigo_500</item>
+        <item name="colorPrimaryDark">@color/material_indigo_700</item>
+        <item name="colorAccent">@color/material_indigo_accent_200</item>
+        <item name="colorMaterial100">@color/material_indigo_100</item>
+        <item name="colorMaterial300">@color/material_indigo_300</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.BITSBox.Light.ActionBar</item>
+    </style>
+
+    <style name="Theme.BITSBox.LightBlue" parent="Theme.BITSBox">
+        <item name="colorPrimary">@color/material_light_blue_500</item>
+        <item name="colorPrimaryDark">@color/material_light_blue_700</item>
+        <item name="colorAccent">@color/material_light_blue_accent_200</item>
+        <item name="colorMaterial100">@color/material_light_blue_100</item>
+        <item name="colorMaterial300">@color/material_light_blue_300</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.BITSBox.Light.ActionBar</item>
+    </style>
+
+    <style name="Theme.BITSBox.LightGreen" parent="Theme.BITSBox">
+        <item name="colorPrimary">@color/material_light_green_500</item>
+        <item name="colorPrimaryDark">@color/material_light_green_700</item>
+        <item name="colorAccent">@color/material_light_green_accent_200</item>
+        <item name="colorMaterial100">@color/material_light_green_100</item>
+        <item name="colorMaterial300">@color/material_light_green_300</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.BITSBox.Light.ActionBar</item>
+    </style>
+
+    <style name="Theme.BITSBox.Lime" parent="Theme.BITSBox">
+        <item name="colorPrimary">@color/material_lime_500</item>
+        <item name="colorPrimaryDark">@color/material_lime_700</item>
+        <item name="colorAccent">@color/material_lime_accent_200</item>
+        <item name="colorMaterial100">@color/material_lime_100</item>
+        <item name="colorMaterial300">@color/material_lime_300</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.BITSBox.Light.ActionBar</item>
+    </style>
+
+    <style name="Theme.BITSBox.Orange" parent="Theme.BITSBox">
+        <item name="colorPrimary">@color/material_orange_500</item>
+        <item name="colorPrimaryDark">@color/material_orange_700</item>
+        <item name="colorAccent">@color/material_orange_accent_200</item>
+        <item name="colorMaterial100">@color/material_orange_100</item>
+        <item name="colorMaterial300">@color/material_orange_300</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.BITSBox.Light.ActionBar</item>
+    </style>
+
+    <style name="Theme.BITSBox.Purple" parent="Theme.BITSBox">
+        <item name="colorPrimary">@color/material_purple_500</item>
+        <item name="colorPrimaryDark">@color/material_purple_700</item>
+        <item name="colorAccent">@color/material_purple_accent_200</item>
+        <item name="colorMaterial100">@color/material_purple_100</item>
+        <item name="colorMaterial300">@color/material_purple_300</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.BITSBox.Light.ActionBar</item>
+    </style>
+
+    <style name="Theme.BITSBox.Red" parent="Theme.BITSBox">
+        <item name="colorPrimary">@color/material_red_500</item>
+        <item name="colorPrimaryDark">@color/material_red_700</item>
+        <item name="colorAccent">@color/material_red_accent_200</item>
+        <item name="colorMaterial100">@color/material_red_100</item>
+        <item name="colorMaterial300">@color/material_red_300</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.BITSBox.Light.ActionBar</item>
+    </style>
+
+    <style name="Theme.BITSBox.Teal" parent="Theme.BITSBox">
+        <item name="colorPrimary">@color/material_teal_500</item>
+        <item name="colorPrimaryDark">@color/material_teal_700</item>
+        <item name="colorAccent">@color/material_teal_accent_200</item>
+        <item name="colorMaterial100">@color/material_teal_100</item>
+        <item name="colorMaterial300">@color/material_teal_300</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.BITSBox.Light.ActionBar</item>
+    </style>
+
+    <style name="Theme.BITSBox.Yellow" parent="Theme.BITSBox">
+        <item name="colorPrimary">@color/material_yellow_500</item>
+        <item name="colorPrimaryDark">@color/material_yellow_700</item>
+        <item name="colorAccent">@color/material_yellow_accent_200</item>
+        <item name="colorMaterial100">@color/material_yellow_100</item>
+        <item name="colorMaterial300">@color/material_yellow_300</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.BITSBox.Light.ActionBar</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.Amber" parent="Theme.BITSBox.Dialog">
+        <item name="colorPrimary">@color/material_amber_500</item>
+        <item name="colorPrimaryDark">@color/material_amber_700</item>
+        <item name="colorAccent">@color/material_amber_accent_200</item>
+        <item name="colorMaterial100">@color/material_amber_100</item>
+        <item name="colorMaterial300">@color/material_amber_300</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.Blue" parent="Theme.BITSBox.Dialog">
+        <item name="colorPrimary">@color/material_blue_500</item>
+        <item name="colorPrimaryDark">@color/material_blue_700</item>
+        <item name="colorAccent">@color/material_blue_accent_200</item>
+        <item name="colorMaterial100">@color/material_blue_100</item>
+        <item name="colorMaterial300">@color/material_blue_300</item>
+        <item name="colorOnPrimary">@color/white</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.BlueGrey" parent="Theme.BITSBox.Dialog">
+        <item name="colorPrimary">@color/material_blue_grey_500</item>
+        <item name="colorPrimaryDark">@color/material_blue_grey_700</item>
+        <item name="colorAccent">@color/material_blue_grey_200</item>
+        <item name="colorMaterial100">@color/material_blue_grey_100</item>
+        <item name="colorMaterial300">@color/material_blue_grey_300</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.Brown" parent="Theme.BITSBox.Dialog">
+        <item name="colorPrimary">@color/material_brown_500</item>
+        <item name="colorPrimaryDark">@color/material_brown_700</item>
+        <item name="colorAccent">@color/material_brown_200</item>
+        <item name="colorMaterial100">@color/material_brown_100</item>
+        <item name="colorMaterial300">@color/material_brown_300</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.Cyan" parent="Theme.BITSBox.Dialog">
+        <item name="colorPrimary">@color/material_cyan_500</item>
+        <item name="colorPrimaryDark">@color/material_cyan_700</item>
+        <item name="colorAccent">@color/material_cyan_accent_200</item>
+        <item name="colorMaterial100">@color/material_cyan_100</item>
+        <item name="colorMaterial300">@color/material_cyan_300</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.DeepOrange" parent="Theme.BITSBox.Dialog">
+        <item name="colorPrimary">@color/material_deep_orange_500</item>
+        <item name="colorPrimaryDark">@color/material_deep_orange_700</item>
+        <item name="colorAccent">@color/material_deep_orange_accent_200</item>
+        <item name="colorMaterial100">@color/material_deep_orange_100</item>
+        <item name="colorMaterial300">@color/material_deep_orange_300</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.DeepPurple" parent="Theme.BITSBox.Dialog">
+        <item name="colorPrimary">@color/material_deep_purple_500</item>
+        <item name="colorPrimaryDark">@color/material_deep_purple_700</item>
+        <item name="colorAccent">@color/material_deep_purple_accent_200</item>
+        <item name="colorMaterial100">@color/material_deep_purple_100</item>
+        <item name="colorMaterial300">@color/material_deep_purple_300</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.Green" parent="Theme.BITSBox.Dialog">
+        <item name="colorPrimary">@color/material_green_500</item>
+        <item name="colorPrimaryDark">@color/material_green_700</item>
+        <item name="colorAccent">@color/material_green_accent_200</item>
+        <item name="colorMaterial100">@color/material_green_100</item>
+        <item name="colorMaterial300">@color/material_green_300</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.Grey" parent="Theme.BITSBox.Dialog">
+        <item name="colorPrimary">@color/material_grey_500</item>
+        <item name="colorPrimaryDark">@color/material_grey_700</item>
+        <item name="colorAccent">@color/material_grey_200</item>
+        <item name="colorMaterial100">@color/material_grey_100</item>
+        <item name="colorMaterial300">@color/material_grey_300</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.Indigo" parent="Theme.BITSBox.Dialog">
+        <item name="colorPrimary">@color/material_indigo_500</item>
+        <item name="colorPrimaryDark">@color/material_indigo_700</item>
+        <item name="colorAccent">@color/material_indigo_accent_200</item>
+        <item name="colorMaterial100">@color/material_indigo_100</item>
+        <item name="colorMaterial300">@color/material_indigo_300</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.LightBlue" parent="Theme.BITSBox.Dialog">
+        <item name="colorPrimary">@color/material_light_blue_500</item>
+        <item name="colorPrimaryDark">@color/material_light_blue_700</item>
+        <item name="colorAccent">@color/material_light_blue_accent_200</item>
+        <item name="colorMaterial100">@color/material_light_blue_100</item>
+        <item name="colorMaterial300">@color/material_light_blue_300</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.LightGreen" parent="Theme.BITSBox.Dialog">
+        <item name="colorPrimary">@color/material_light_green_500</item>
+        <item name="colorPrimaryDark">@color/material_light_green_700</item>
+        <item name="colorAccent">@color/material_light_green_accent_200</item>
+        <item name="colorMaterial100">@color/material_light_green_100</item>
+        <item name="colorMaterial300">@color/material_light_green_300</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.Lime" parent="Theme.BITSBox.Dialog">
+        <item name="colorPrimary">@color/material_lime_500</item>
+        <item name="colorPrimaryDark">@color/material_lime_700</item>
+        <item name="colorAccent">@color/material_lime_accent_200</item>
+        <item name="colorMaterial100">@color/material_lime_100</item>
+        <item name="colorMaterial300">@color/material_lime_300</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.Orange" parent="Theme.BITSBox.Dialog">
+        <item name="colorPrimary">@color/material_orange_500</item>
+        <item name="colorPrimaryDark">@color/material_orange_700</item>
+        <item name="colorAccent">@color/material_orange_accent_200</item>
+        <item name="colorMaterial100">@color/material_orange_100</item>
+        <item name="colorMaterial300">@color/material_orange_300</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.Purple" parent="Theme.BITSBox.Dialog">
+        <item name="colorPrimary">@color/material_purple_500</item>
+        <item name="colorPrimaryDark">@color/material_purple_700</item>
+        <item name="colorAccent">@color/material_purple_accent_200</item>
+        <item name="colorMaterial100">@color/material_purple_100</item>
+        <item name="colorMaterial300">@color/material_purple_300</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.Red" parent="Theme.BITSBox.Dialog">
+        <item name="colorPrimary">@color/material_red_500</item>
+        <item name="colorPrimaryDark">@color/material_red_700</item>
+        <item name="colorAccent">@color/material_red_accent_200</item>
+        <item name="colorMaterial100">@color/material_red_100</item>
+        <item name="colorMaterial300">@color/material_red_300</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.Pink_SSR" parent="Theme.BITSBox.Dialog">
+        <item name="colorPrimary">@color/color_pink_ssr</item>
+        <item name="colorPrimaryDark">@color/color_pink_ssr</item>
+        <item name="colorSecondary">@color/color_pink_ssr</item>
+        <item name="colorAccent">@color/material_pink_accent_200</item>
+        <item name="colorMaterial100">@color/material_pink_accent_100</item>
+        <item name="colorMaterial300">@color/color_pink_ssr</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.Pink" parent="Theme.BITSBox.Dialog">
+        <item name="colorPrimary">@color/material_pink_500</item>
+        <item name="colorPrimaryDark">@color/material_pink_500</item>
+        <item name="colorSecondary">@color/material_pink_500</item>
+        <item name="colorAccent">@color/material_pink_accent_200</item>
+        <item name="colorMaterial100">@color/material_pink_accent_100</item>
+        <item name="colorMaterial300">@color/material_pink_500</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.Teal" parent="Theme.BITSBox.Dialog">
+        <item name="colorPrimary">@color/material_teal_500</item>
+        <item name="colorPrimaryDark">@color/material_teal_700</item>
+        <item name="colorAccent">@color/material_teal_accent_200</item>
+        <item name="colorMaterial100">@color/material_teal_100</item>
+        <item name="colorMaterial300">@color/material_teal_300</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.Yellow" parent="Theme.BITSBox.Dialog">
+        <item name="colorPrimary">@color/material_yellow_500</item>
+        <item name="colorPrimaryDark">@color/material_yellow_700</item>
+        <item name="colorAccent">@color/material_yellow_accent_200</item>
+        <item name="colorMaterial100">@color/material_yellow_100</item>
+        <item name="colorMaterial300">@color/material_yellow_300</item>
+        <item name="colorOnPrimarySurface">@color/black</item>
+    </style>
+
+    <style name="Theme.Start" parent="Theme.MaterialComponents.DayNight">
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="colorPrimary">@android:color/transparent</item>
+        <item name="colorPrimaryDark">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+</resources>

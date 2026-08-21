@@ -1,0 +1,15 @@
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:drawable="@drawable/ic_service_busy">
+    <target android:name="path">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                android:duration="@android:integer/config_mediumAnimTime"
+                android:interpolator="@android:interpolator/fast_out_slow_in"
+                android:propertyName="pathData"
+                android:valueFrom="M12,2l8,3v6c0,5.8 -3.5,10.8 -8,13c-4.5,-2.2 -8,-7.2 -8,-13V5z"
+                android:valueTo="M12,2l8,3v6c0,5.8 -3.5,10.8 -8,13c-4.5,-2.2 -8,-7.2 -8,-13V5z"
+                android:valueType="pathType" />
+        </aapt:attr>
+    </target>
+</animated-vector>

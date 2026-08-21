@@ -1,0 +1,16 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- White background is the icon backdrop; solid green shield = Google Authenticator style -->
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M54,4.5L13.5,22.5v27c0,24.75 18,47.25 45,54c27-6.75 45-26.25 45-54V22.5z" />
+    <!-- White down-arrow in the center of the shield -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,70L30,42H78z"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2" />
+</vector>

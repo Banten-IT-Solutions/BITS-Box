@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_search"
+        android:title="@android:string/search_go"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_add"
+        android:icon="@drawable/ic_av_playlist_add"
+        android:title="@string/add_profile"
+        app:showAsAction="ifRoom">
+        <menu>
+            <item
+                android:id="@+id/action_scan_qr_code"
+                android:icon="@drawable/ic_baseline_center_focus_weak_24"
+                android:title="@string/add_profile_methods_scan_qr_code"
+                app:iconTint="?attr/mainIconText" />
+            <item
+                android:id="@+id/action_import_clipboard"
+                android:icon="@drawable/baseline_keyboard_tab_24"
+                android:title="@string/action_import"
+                app:iconTint="?attr/mainIconText" />
+            <item
+                android:id="@+id/action_import_file"
+                android:icon="@drawable/ic_baseline_download_24"
+                android:title="@string/action_import_file"
+                app:iconTint="?attr/mainIconText" />
+            <item
+                android:id="@+id/action_manual_settings"
+                android:icon="@drawable/ic_action_settings"
+                android:title="@string/add_profile_methods_manual_settings"
+                app:iconTint="?attr/mainIconText" />
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/action_misc"
+        android:icon="@drawable/ic_baseline_more_vert_24"
+        android:title=""
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/action_update_subscription"
+                android:icon="@drawable/ic_baseline_refresh_24"
+                android:title="@string/update_current_subscription"
+                app:iconTint="?attr/mainIconText" />
+            <item
+                android:id="@+id/action_clear_traffic_statistics"
+                android:icon="@drawable/ic_device_data_usage"
+                android:title="@string/clear_traffic_statistics"
+                app:iconTint="?attr/mainIconText" />
+            <item
+                android:id="@+id/action_remove_duplicate"
+                android:icon="@drawable/ic_baseline_compare_arrows_24"
+                android:title="@string/remove_duplicate"
+                app:iconTint="?attr/mainIconText" />
+            <item
+                android:id="@+id/action_connection_tcp_ping"
+                android:icon="@drawable/ic_baseline_speed_24"
+                android:title="@string/connection_test_tcp_ping"
+                app:iconTint="?attr/mainIconText" />
+            <item
+                android:id="@+id/action_connection_url_test"
+                android:icon="@drawable/baseline_public_24"
+                android:title="@string/connection_test_url_test"
+                app:iconTint="?attr/mainIconText" />
+            <item
+                android:id="@+id/action_connection_test_clear_results"
+                android:icon="@drawable/baseline_delete_sweep_24"
+                android:title="@string/connection_test_clear_results"
+                app:iconTint="?attr/mainIconText" />
+            <item
+                android:id="@+id/action_connection_test_delete_unavailable"
+                android:icon="@drawable/baseline_delete_forever_24"
+                android:title="@string/connection_test_delete_unavailable"
+                app:iconTint="?attr/mainIconText" />
+            <item
+                android:id="@+id/action_order"
+                android:icon="@drawable/ic_baseline_low_priority_24"
+                android:title="@string/group_by"
+                app:iconTint="?attr/mainIconText" />
+        </menu>
+    </item>
+
+</menu>

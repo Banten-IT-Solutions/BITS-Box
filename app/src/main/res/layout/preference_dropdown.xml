@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Dropdown preference row styled exactly like a standard preference row
+     (mirrors androidx preference_material.xml): icon on the left, title/summary
+     in the middle. The Spinner lives in the widget frame but stays GONE so the
+     row looks identical to non-dropdown rows; tapping the row still opens the
+     dropdown (DropDownPreference.onClick -> spinner.performClick()). -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?android:attr/listPreferredItemHeightSmall"
+    android:gravity="center_vertical"
+    android:paddingLeft="?android:attr/listPreferredItemPaddingLeft"
+    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+    android:paddingRight="?android:attr/listPreferredItemPaddingRight"
+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+    android:background="?android:attr/selectableItemBackground"
+    android:clipToPadding="false"
+    android:baselineAligned="false">
+
+    <!-- Icon frame: same image_frame as non-dropdown rows (icon tint = ContentIconText) -->
+    <include layout="@layout/image_frame" />
+
+    <!-- Invisible 0dp anchor spinner: DropDownPreference.onClick -> spinner.performClick()
+         opens the popup aligned with the TITLE/summary (right after the icon frame),
+         NOT the screen edge or the icon. -->
+    <id.bits.box.ui.ContentFitSpinner
+        android:id="@+id/spinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="invisible" />
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp">
+
+        <TextView
+            android:id="@android:id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:textColor="?attr/ContentIconText"
+            android:ellipsize="marquee" />
+
+        <TextView
+            android:id="@android:id/summary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@android:id/title"
+            android:layout_alignLeft="@android:id/title"
+            android:layout_alignStart="@android:id/title"
+            android:layout_gravity="start"
+            android:textAlignment="viewStart"
+            android:textColor="?attr/ContentIconText"
+            android:maxLines="10"
+            style="@style/PreferenceSummaryTextStyle" />
+    </RelativeLayout>
+
+    <!-- Empty widget frame (16dp start padding), same as standard preference rows -->
+    <LinearLayout
+        android:id="@android:id/widget_frame"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="end|center_vertical"
+        android:paddingLeft="16dp"
+        android:paddingStart="16dp"
+        android:paddingRight="0dp"
+        android:paddingEnd="0dp"
+        android:orientation="vertical" />
+</LinearLayout>

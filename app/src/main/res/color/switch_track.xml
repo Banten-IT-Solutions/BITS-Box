@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Checked: primary dark color (tone 700 per theme) -->
+    <item android:color="?attr/colorPrimaryDark" android:state_checked="true" />
+    <!-- Unchecked: outline (gray) -->
+    <item android:color="?attr/colorOutline" />
+</selector>

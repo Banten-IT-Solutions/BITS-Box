@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_order_origin"
+        android:icon="@drawable/ic_baseline_format_align_left_24"
+        android:title="@string/group_order_origin"
+        app:iconTint="?attr/mainIconText" />
+    <item
+        android:id="@+id/action_order_by_name"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="@string/order_name"
+        app:iconTint="?attr/mainIconText" />
+    <item
+        android:id="@+id/action_order_by_delay"
+        android:icon="@drawable/ic_baseline_timelapse_24"
+        android:title="@string/order_delay"
+        app:iconTint="?attr/mainIconText" />
+</menu>

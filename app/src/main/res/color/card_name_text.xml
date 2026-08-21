@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Profile name text: onPrimary when card selected, theme text primary otherwise -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:color="?attr/colorOnPrimary"
+        android:state_selected="true" />
+    <item android:color="?android:attr/textColorPrimary" />
+</selector>

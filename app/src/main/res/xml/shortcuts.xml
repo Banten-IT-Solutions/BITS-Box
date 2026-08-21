@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:icon="@drawable/ic_shortcut_toggle"
+        android:shortcutId="toggle"
+        android:shortcutLongLabel="@string/quick_toggle"
+        android:shortcutShortLabel="@string/quick_toggle">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetClass="id.bits.box.QuickToggleShortcut"
+            android:targetPackage="id.bits.box" />
+    </shortcut>
+    <shortcut
+        android:icon="@drawable/ic_shortcut_enable"
+        android:shortcutId="enable"
+        android:shortcutLongLabel="@string/quick_enable"
+        android:shortcutShortLabel="@string/quick_enable">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetClass="id.bits.box.ui.QuickEnableShortcut"
+            android:targetPackage="id.bits.box" />
+    </shortcut>
+    <shortcut
+        android:icon="@drawable/ic_shortcut_disable"
+        android:shortcutId="disable"
+        android:shortcutLongLabel="@string/quick_disable"
+        android:shortcutShortLabel="@string/quick_disable">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetClass="id.bits.box.ui.QuickDisableShortcut"
+            android:targetPackage="id.bits.box" />
+    </shortcut>
+    <shortcut
+        android:icon="@drawable/ic_shortcut_scan"
+        android:shortcutId="scan"
+        android:shortcutLongLabel="@string/add_profile_methods_scan_qr_code"
+        android:shortcutShortLabel="@string/add_profile_methods_scan_qr_code">
+        <intent
+            android:action="android.intent.action.MAIN"
+            android:targetClass="id.bits.box.ui.ScannerActivity"
+            android:targetPackage="id.bits.box" />
+    </shortcut>
+</shortcuts>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_delete"
+        android:alphabeticShortcut="d"
+        android:icon="@drawable/ic_action_delete"
+        android:title="@string/delete"
+        app:iconTint="?attr/mainIconText"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_apply"
+        android:alphabeticShortcut="s"
+        android:icon="@drawable/ic_action_done"
+        android:title="@string/apply"
+        app:iconTint="?attr/mainIconText"
+        app:showAsAction="always" />
+
+    <!-- Overflow submenu: semua item di sini akan nongol icon di dropdown -->
+    <item
+        android:id="@+id/action_more"
+        android:icon="@drawable/ic_baseline_more_vert_24"
+        android:title=""
+        app:iconTint="?attr/mainIconText"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/action_create_shortcut"
+                android:icon="@drawable/ic_baseline_fiber_manual_record_24"
+                android:title="@string/create_shortcut"
+                app:iconTint="?attr/mainIconText"
+                android:visible="false" />
+            <item
+                android:id="@+id/action_move"
+                android:icon="@drawable/ic_baseline_compare_arrows_24"
+                android:title="@string/move"
+                app:iconTint="?attr/mainIconText"
+                android:visible="false" />
+            <item
+                android:id="@+id/action_custom_outbound_json"
+                android:icon="@drawable/baseline_wrap_text_24"
+                android:title="@string/custom_outbound_json"
+                app:iconTint="?attr/mainIconText"
+                android:visible="false" />
+            <item
+                android:id="@+id/action_custom_config_json"
+                android:icon="@drawable/baseline_widgets_24"
+                android:title="@string/custom_config_json"
+                app:iconTint="?attr/mainIconText"
+                android:visible="false" />
+        </menu>
+    </item>
+
+</menu>

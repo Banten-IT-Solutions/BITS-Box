@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Popup window background wrapper for popups that open DOWNWARD
+  (e.g. the appbar dropdown submenus). Only the bottom corners are
+  rounded so the square top edge visually connects to the anchor above.
+  See bg_popup_window.xml for the ripple/opacity rationale.
+-->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?attr/colorPrimary">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="?attr/colorPrimary" />
+            <corners
+                android:topLeftRadius="0dp"
+                android:topRightRadius="0dp"
+                android:bottomLeftRadius="16dp"
+                android:bottomRightRadius="16dp" />
+        </shape>
+    </item>
+</ripple>

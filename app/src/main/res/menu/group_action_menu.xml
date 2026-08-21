@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_universal_qr"
+        android:title="@string/share_qr_nfc"
+        android:icon="@drawable/ic_social_share"
+        app:iconTint="?attr/mainIconText" />
+    <item
+        android:id="@+id/action_universal_clipboard"
+        android:title="Link"
+        android:icon="@drawable/ic_baseline_link_24"
+        app:iconTint="?attr/mainIconText" />
+    <item
+        android:id="@+id/action_export_clipboard"
+        android:title="@string/copy"
+        android:icon="@drawable/ic_baseline_content_copy_24"
+        app:iconTint="?attr/mainIconText" />
+    <item
+        android:id="@+id/action_export_file"
+        android:title="Export"
+        android:icon="@drawable/baseline_send_24"
+        app:iconTint="?attr/mainIconText" />
+    <item
+        android:id="@+id/action_clear"
+        android:title="@string/clear_profiles"
+        android:icon="@drawable/baseline_delete_sweep_24"
+        app:iconTint="?attr/mainIconText" />
+</menu>

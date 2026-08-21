@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Night variants: primary lightens to tone 300 (pops on dark surfaces),
+     onPrimary darkens to tone 900 (readable on light primary).
+     colorPrimaryDark stays tone 700 so the status bar stays dark with white icons. -->
+<resources>
+
+    <!-- Base theme - night -->
+    <style name="Theme.BITSBox" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/material_blue_300</item>
+        <item name="colorPrimaryDark">@color/primary_variant</item>
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorOnSecondary">@color/onSecondary</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorMaterial100">@color/material_blue_grey_900</item>
+        <item name="colorMaterial300">@color/material_blue_grey_500</item>
+
+        <item name="accentOrTextSecondary">?colorSecondary</item>
+        <item name="accentOrTextPrimary">?colorSecondary</item>
+        <item name="primaryOrTextSecondary">?colorPrimary</item>
+        <item name="primaryOrTextPrimary">?colorOnPrimary</item>
+        <item name="whiteOrTextPrimary">?colorOnPrimary</item>
+        <item name="mainIconText">@color/black</item>
+        <item name="ContentIconText">@color/white</item>
+
+        <!-- Global switch style: force thumb/track to theme colors (see values/themes.xml) -->
+        <item name="switchStyle">@style/Widget.BITSBox.CompoundButton.Switch</item>
+        <item name="android:switchStyle">@style/Widget.BITSBox.CompoundButton.Switch</item>
+
+        <item name="actionBarTheme">@style/ThemeOverlay.BITSBox.Dark.ActionBar</item>
+        <item name="popupMenuStyle">@style/Widget.BITSBox.PopupMenu</item>
+        <item name="actionOverflowMenuStyle">@style/Widget.BITSBox.PopupMenu.Overflow</item>
+        <item name="textAppearanceSmallPopupMenu">@style/TextAppearance.BITSBox.PopupMenu</item>
+        <item name="textAppearanceLargePopupMenu">@style/TextAppearance.BITSBox.PopupMenu</item>
+        <item name="listMenuViewStyle">@style/Widget.BITSBox.ListMenuView</item>
+        <item name="colorControlNormal">?attr/mainIconText</item>
+        <item name="colorControlActivated">?attr/mainIconText</item>
+        <item name="android:colorControlNormal">?attr/mainIconText</item>
+        <item name="android:colorControlActivated">?attr/mainIconText</item>
+        <item name="spinnerStyle">@style/Widget.BITSBox.Spinner</item>
+        <item name="android:dropDownListViewStyle">@style/Widget.BITSBox.DropDownListView</item>
+        <item name="android:popupBackground">@drawable/bg_popup_window</item>
+        <item name="android:popupAnimationStyle">@anim/bitsbox_popup_enter</item>
+        <item name="preferenceTheme">@style/PreferenceTheme.BITSBox</item>
+    </style>
+
+    <!-- Preference screens: icons + text use ContentIconText for surface contrast -->
+    <!-- Parent Theme.BITSBox so ?attr/ContentIconText resolves; carry BasePreferenceThemeOverlay items -->
+    <style name="PreferenceTheme.BITSBox" parent="Theme.BITSBox">
+        <item name="checkBoxPreferenceStyle">@style/Preference.CheckBoxPreference.Material</item>
+        <item name="dialogPreferenceStyle">@style/Preference.DialogPreference.Material</item>
+        <item name="dropdownPreferenceStyle">@style/Preference.DropDown.BITSBox</item>
+        <item name="editTextPreferenceStyle">@style/Preference.DialogPreference.EditTextPreference.BITSBox</item>
+        <item name="preferenceCategoryStyle">@style/Preference.Category.Material</item>
+        <item name="preferenceFragmentCompatStyle">@style/PreferenceFragment.Material</item>
+        <item name="preferenceFragmentListStyle">@style/PreferenceFragmentList.Material</item>
+        <item name="preferenceFragmentStyle">@style/PreferenceFragment.Material</item>
+        <item name="preferenceScreenStyle">@style/Preference.PreferenceScreen.Material</item>
+        <item name="preferenceStyle">@style/Preference.Material</item>
+        <item name="seekBarPreferenceStyle">@style/Preference.SeekBarPreference.Material</item>
+        <item name="switchPreferenceCompatStyle">@style/Preference.SwitchPreferenceCompat.BITSBox</item>
+        <item name="switchPreferenceStyle">@style/Preference.SwitchPreference.Material</item>
+        <item name="preferenceCategoryTitleTextAppearance">@style/TextAppearance.AppCompat.Body2</item>
+        <item name="preferenceCategoryTitleTextColor">?attr/colorPrimary</item>
+        <item name="ContentIconText">@color/white</item>
+        <item name="android:textColorPrimary">?attr/ContentIconText</item>
+        <item name="android:textColorSecondary">?attr/ContentIconText</item>
+        <item name="colorSecondary">?attr/colorPrimary</item>
+        <item name="colorControlActivated">?attr/colorPrimary</item>
+        <item name="android:colorControlActivated">?attr/colorPrimary</item>
+        <item name="colorOnSecondary">?attr/colorPrimary</item>
+        <item name="colorSecondaryContainer">?attr/mainIconText</item>
+        <item name="colorOnSecondaryContainer">?attr/ContentIconText</item>
+    </style>
+
+    <!-- Custom switch style: thumb/track use ColorStateList selectors -->
+    <style name="Preference.SwitchPreferenceCompat.BITSBox" parent="Preference.SwitchPreferenceCompat.Material">
+        <item name="android:thumbTint">@color/switch_thumb</item>
+        <item name="android:trackTint">@color/switch_track</item>
+    </style>
+
+    <!-- Base dialog - night -->
+    <style name="Theme.BITSBox.Dialog" parent="Theme.Material3.DayNight.Dialog.Alert">
+        <item name="colorPrimary">@color/material_blue_300</item>
+        <item name="colorPrimaryDark">@color/primary_variant</item>
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorMaterial100">@color/material_blue_grey_900</item>
+        <item name="colorMaterial300">@color/material_blue_grey_500</item>
+        <item name="whiteOrTextPrimary">@color/white</item>
+        <item name="preferenceTheme">@style/PreferenceTheme.BITSBox</item>
+    </style>
+
+    <!-- 20 selectable themes - night variants -->
+    <style name="Theme.BITSBox.Red">
+        <item name="colorPrimary">@color/material_red_300</item>
+        <item name="colorPrimaryDark">@color/material_red_700</item>
+        <item name="colorAccent">@color/material_red_accent_200</item>
+        <item name="colorMaterial100">@color/material_red_900</item>
+        <item name="colorMaterial300">@color/material_red_500</item>
+        <item name="colorOnPrimary">@color/black</item>
+    </style>
+
+    <style name="Theme.BITSBox.Pink_SSR">
+        <item name="colorPrimary">@color/material_pink_200</item>
+        <item name="colorPrimaryDark">@color/material_pink_700</item>
+        <item name="colorSecondary">@color/material_pink_700</item>
+        <item name="colorAccent">@color/material_pink_accent_200</item>
+        <item name="colorMaterial100">@color/material_pink_900</item>
+        <item name="colorMaterial300">@color/color_pink_ssr</item>
+        <item name="colorOnPrimary">@color/black</item>
+    </style>
+
+    <style name="Theme.BITSBox.Pink">
+        <item name="colorPrimary">@color/material_pink_300</item>
+        <item name="colorPrimaryDark">@color/material_pink_700</item>
+        <item name="colorSecondary">@color/material_pink_700</item>
+        <item name="colorAccent">@color/material_pink_accent_200</item>
+        <item name="colorMaterial100">@color/material_pink_900</item>
+        <item name="colorMaterial300">@color/material_pink_500</item>
+        <item name="colorOnPrimary">@color/black</item>
+    </style>
+
+    <style name="Theme.BITSBox.Purple">
+        <item name="colorPrimary">@color/material_purple_300</item>
+        <item name="colorPrimaryDark">@color/material_purple_700</item>
+        <item name="colorAccent">@color/material_purple_accent_200</item>
+        <item name="colorMaterial100">@color/material_purple_900</item>
+        <item name="colorMaterial300">@color/material_purple_500</item>
+        <item name="colorOnPrimary">@color/black</item>
+    </style>
+
+    <style name="Theme.BITSBox.DeepPurple">
+        <item name="colorPrimary">@color/material_deep_purple_300</item>
+        <item name="colorPrimaryDark">@color/material_deep_purple_700</item>
+        <item name="colorAccent">@color/material_deep_purple_accent_200</item>
+        <item name="colorMaterial100">@color/material_deep_purple_900</item>
+        <item name="colorMaterial300">@color/material_deep_purple_500</item>
+        <item name="colorOnPrimary">@color/black</item>
+    </style>
+
+    <style name="Theme.BITSBox.Indigo">
+        <item name="colorPrimary">@color/material_indigo_300</item>
+        <item name="colorPrimaryDark">@color/material_indigo_700</item>
+        <item name="colorAccent">@color/material_indigo_accent_200</item>
+        <item name="colorMaterial100">@color/material_indigo_900</item>
+        <item name="colorMaterial300">@color/material_indigo_500</item>
+        <item name="colorOnPrimary">@color/black</item>
+    </style>
+
+    <style name="Theme.BITSBox.Blue">
+        <item name="colorPrimary">@color/material_blue_300</item>
+        <item name="colorPrimaryDark">@color/material_blue_700</item>
+        <item name="colorAccent">@color/material_blue_accent_200</item>
+        <item name="colorMaterial100">@color/material_blue_900</item>
+        <item name="colorMaterial300">@color/material_blue_500</item>
+        <item name="colorOnPrimary">@color/black</item>
+    </style>
+
+    <style name="Theme.BITSBox.LightBlue">
+        <item name="colorPrimary">@color/material_light_blue_300</item>
+        <item name="colorPrimaryDark">@color/material_light_blue_700</item>
+        <item name="colorAccent">@color/material_light_blue_accent_200</item>
+        <item name="colorMaterial100">@color/material_light_blue_900</item>
+        <item name="colorMaterial300">@color/material_light_blue_500</item>
+        <item name="colorOnPrimary">@color/black</item>
+    </style>
+
+    <style name="Theme.BITSBox.Cyan">
+        <item name="colorPrimary">@color/material_cyan_300</item>
+        <item name="colorPrimaryDark">@color/material_cyan_700</item>
+        <item name="colorAccent">@color/material_cyan_accent_200</item>
+        <item name="colorMaterial100">@color/material_cyan_900</item>
+        <item name="colorMaterial300">@color/material_cyan_500</item>
+        <item name="colorOnPrimary">@color/black</item>
+    </style>
+
+    <style name="Theme.BITSBox.Teal">
+        <item name="colorPrimary">@color/material_teal_300</item>
+        <item name="colorPrimaryDark">@color/material_teal_700</item>
+        <item name="colorAccent">@color/material_teal_accent_200</item>
+        <item name="colorMaterial100">@color/material_teal_900</item>
+        <item name="colorMaterial300">@color/material_teal_500</item>
+        <item name="colorOnPrimary">@color/black</item>
+    </style>
+
+    <style name="Theme.BITSBox.Green">
+        <item name="colorPrimary">@color/material_green_300</item>
+        <item name="colorPrimaryDark">@color/material_green_700</item>
+        <item name="colorAccent">@color/material_green_accent_200</item>
+        <item name="colorMaterial100">@color/material_green_900</item>
+        <item name="colorMaterial300">@color/material_green_500</item>
+        <item name="colorOnPrimary">@color/black</item>
+    </style>
+
+    <style name="Theme.BITSBox.LightGreen">
+        <item name="colorPrimary">@color/material_light_green_300</item>
+        <item name="colorPrimaryDark">@color/material_light_green_700</item>
+        <item name="colorAccent">@color/material_light_green_accent_200</item>
+        <item name="colorMaterial100">@color/material_light_green_900</item>
+        <item name="colorMaterial300">@color/material_light_green_500</item>
+        <item name="colorOnPrimary">@color/black</item>
+    </style>
+
+    <style name="Theme.BITSBox.Lime">
+        <item name="colorPrimary">@color/material_lime_300</item>
+        <item name="colorPrimaryDark">@color/material_lime_700</item>
+        <item name="colorAccent">@color/material_lime_accent_200</item>
+        <item name="colorMaterial100">@color/material_lime_900</item>
+        <item name="colorMaterial300">@color/material_lime_500</item>
+        <item name="colorOnPrimary">@color/black</item>
+    </style>
+
+    <style name="Theme.BITSBox.Yellow">
+        <item name="colorPrimary">@color/material_yellow_300</item>
+        <item name="colorPrimaryDark">@color/material_yellow_700</item>
+        <item name="colorAccent">@color/material_yellow_accent_200</item>
+        <item name="colorMaterial100">@color/material_yellow_900</item>
+        <item name="colorMaterial300">@color/material_yellow_500</item>
+        <item name="colorOnPrimary">@color/black</item>
+    </style>
+
+    <style name="Theme.BITSBox.Amber">
+        <item name="colorPrimary">@color/material_amber_300</item>
+        <item name="colorPrimaryDark">@color/material_amber_700</item>
+        <item name="colorAccent">@color/material_amber_accent_200</item>
+        <item name="colorMaterial100">@color/material_amber_900</item>
+        <item name="colorMaterial300">@color/material_amber_500</item>
+        <item name="colorOnPrimary">@color/black</item>
+    </style>
+
+    <style name="Theme.BITSBox.Orange">
+        <item name="colorPrimary">@color/material_orange_300</item>
+        <item name="colorPrimaryDark">@color/material_orange_700</item>
+        <item name="colorAccent">@color/material_orange_accent_200</item>
+        <item name="colorMaterial100">@color/material_orange_900</item>
+        <item name="colorMaterial300">@color/material_orange_500</item>
+        <item name="colorOnPrimary">@color/black</item>
+    </style>
+
+    <style name="Theme.BITSBox.DeepOrange">
+        <item name="colorPrimary">@color/material_deep_orange_300</item>
+        <item name="colorPrimaryDark">@color/material_deep_orange_700</item>
+        <item name="colorAccent">@color/material_deep_orange_accent_200</item>
+        <item name="colorMaterial100">@color/material_deep_orange_900</item>
+        <item name="colorMaterial300">@color/material_deep_orange_500</item>
+        <item name="colorOnPrimary">@color/black</item>
+    </style>
+
+    <style name="Theme.BITSBox.Brown">
+        <item name="colorPrimary">@color/material_brown_300</item>
+        <item name="colorPrimaryDark">@color/material_brown_700</item>
+        <item name="colorAccent">@color/material_brown_200</item>
+        <item name="colorMaterial100">@color/material_brown_900</item>
+        <item name="colorMaterial300">@color/material_brown_500</item>
+        <item name="colorOnPrimary">@color/black</item>
+    </style>
+
+    <style name="Theme.BITSBox.Grey">
+        <item name="colorPrimary">@color/material_grey_300</item>
+        <item name="colorPrimaryDark">@color/material_grey_700</item>
+        <item name="colorAccent">@color/material_grey_200</item>
+        <item name="colorMaterial100">@color/material_grey_900</item>
+        <item name="colorMaterial300">@color/material_grey_500</item>
+        <item name="colorOnPrimary">@color/black</item>
+    </style>
+
+    <style name="Theme.BITSBox.BlueGrey">
+        <item name="colorPrimary">@color/material_blue_grey_300</item>
+        <item name="colorPrimaryDark">@color/material_blue_grey_700</item>
+        <item name="colorAccent">@color/material_blue_grey_200</item>
+        <item name="colorMaterial100">@color/material_blue_grey_900</item>
+        <item name="colorMaterial300">@color/material_blue_grey_500</item>
+        <item name="colorOnPrimary">@color/black</item>
+    </style>
+
+    <!-- Dialog variants - night -->
+    <style name="Theme.BITSBox.Dialog.Red">
+        <item name="colorPrimary">@color/material_red_300</item>
+        <item name="colorPrimaryDark">@color/material_red_700</item>
+        <item name="colorAccent">@color/material_red_accent_200</item>
+        <item name="colorMaterial100">@color/material_red_900</item>
+        <item name="colorMaterial300">@color/material_red_500</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.Pink_SSR">
+        <item name="colorPrimary">@color/material_pink_200</item>
+        <item name="colorPrimaryDark">@color/material_pink_700</item>
+        <item name="colorSecondary">@color/material_pink_700</item>
+        <item name="colorAccent">@color/material_pink_accent_200</item>
+        <item name="colorMaterial100">@color/material_pink_900</item>
+        <item name="colorMaterial300">@color/color_pink_ssr</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.Pink">
+        <item name="colorPrimary">@color/material_pink_300</item>
+        <item name="colorPrimaryDark">@color/material_pink_700</item>
+        <item name="colorSecondary">@color/material_pink_700</item>
+        <item name="colorAccent">@color/material_pink_accent_200</item>
+        <item name="colorMaterial100">@color/material_pink_900</item>
+        <item name="colorMaterial300">@color/material_pink_500</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.Purple">
+        <item name="colorPrimary">@color/material_purple_300</item>
+        <item name="colorPrimaryDark">@color/material_purple_700</item>
+        <item name="colorAccent">@color/material_purple_accent_200</item>
+        <item name="colorMaterial100">@color/material_purple_900</item>
+        <item name="colorMaterial300">@color/material_purple_500</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.DeepPurple">
+        <item name="colorPrimary">@color/material_deep_purple_300</item>
+        <item name="colorPrimaryDark">@color/material_deep_purple_700</item>
+        <item name="colorAccent">@color/material_deep_purple_accent_200</item>
+        <item name="colorMaterial100">@color/material_deep_purple_900</item>
+        <item name="colorMaterial300">@color/material_deep_purple_500</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.Indigo">
+        <item name="colorPrimary">@color/material_indigo_300</item>
+        <item name="colorPrimaryDark">@color/material_indigo_700</item>
+        <item name="colorAccent">@color/material_indigo_accent_200</item>
+        <item name="colorMaterial100">@color/material_indigo_900</item>
+        <item name="colorMaterial300">@color/material_indigo_500</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.Blue">
+        <item name="colorPrimary">@color/material_blue_300</item>
+        <item name="colorPrimaryDark">@color/material_blue_700</item>
+        <item name="colorAccent">@color/material_blue_accent_200</item>
+        <item name="colorMaterial100">@color/material_blue_900</item>
+        <item name="colorMaterial300">@color/material_blue_500</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.LightBlue">
+        <item name="colorPrimary">@color/material_light_blue_300</item>
+        <item name="colorPrimaryDark">@color/material_light_blue_700</item>
+        <item name="colorAccent">@color/material_light_blue_accent_200</item>
+        <item name="colorMaterial100">@color/material_light_blue_900</item>
+        <item name="colorMaterial300">@color/material_light_blue_500</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.Cyan">
+        <item name="colorPrimary">@color/material_cyan_300</item>
+        <item name="colorPrimaryDark">@color/material_cyan_700</item>
+        <item name="colorAccent">@color/material_cyan_accent_200</item>
+        <item name="colorMaterial100">@color/material_cyan_900</item>
+        <item name="colorMaterial300">@color/material_cyan_500</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.Teal">
+        <item name="colorPrimary">@color/material_teal_300</item>
+        <item name="colorPrimaryDark">@color/material_teal_700</item>
+        <item name="colorAccent">@color/material_teal_accent_200</item>
+        <item name="colorMaterial100">@color/material_teal_900</item>
+        <item name="colorMaterial300">@color/material_teal_500</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.Green">
+        <item name="colorPrimary">@color/material_green_300</item>
+        <item name="colorPrimaryDark">@color/material_green_700</item>
+        <item name="colorAccent">@color/material_green_accent_200</item>
+        <item name="colorMaterial100">@color/material_green_900</item>
+        <item name="colorMaterial300">@color/material_green_500</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.LightGreen">
+        <item name="colorPrimary">@color/material_light_green_300</item>
+        <item name="colorPrimaryDark">@color/material_light_green_700</item>
+        <item name="colorAccent">@color/material_light_green_accent_200</item>
+        <item name="colorMaterial100">@color/material_light_green_900</item>
+        <item name="colorMaterial300">@color/material_light_green_500</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.Lime">
+        <item name="colorPrimary">@color/material_lime_300</item>
+        <item name="colorPrimaryDark">@color/material_lime_700</item>
+        <item name="colorAccent">@color/material_lime_accent_200</item>
+        <item name="colorMaterial100">@color/material_lime_900</item>
+        <item name="colorMaterial300">@color/material_lime_500</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.Yellow">
+        <item name="colorPrimary">@color/material_yellow_300</item>
+        <item name="colorPrimaryDark">@color/material_yellow_700</item>
+        <item name="colorAccent">@color/material_yellow_accent_200</item>
+        <item name="colorMaterial100">@color/material_yellow_900</item>
+        <item name="colorMaterial300">@color/material_yellow_500</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.Amber">
+        <item name="colorPrimary">@color/material_amber_300</item>
+        <item name="colorPrimaryDark">@color/material_amber_700</item>
+        <item name="colorAccent">@color/material_amber_accent_200</item>
+        <item name="colorMaterial100">@color/material_amber_900</item>
+        <item name="colorMaterial300">@color/material_amber_500</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.Orange">
+        <item name="colorPrimary">@color/material_orange_300</item>
+        <item name="colorPrimaryDark">@color/material_orange_700</item>
+        <item name="colorAccent">@color/material_orange_accent_200</item>
+        <item name="colorMaterial100">@color/material_orange_900</item>
+        <item name="colorMaterial300">@color/material_orange_500</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.DeepOrange">
+        <item name="colorPrimary">@color/material_deep_orange_300</item>
+        <item name="colorPrimaryDark">@color/material_deep_orange_700</item>
+        <item name="colorAccent">@color/material_deep_orange_accent_200</item>
+        <item name="colorMaterial100">@color/material_deep_orange_900</item>
+        <item name="colorMaterial300">@color/material_deep_orange_500</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.Brown">
+        <item name="colorPrimary">@color/material_brown_300</item>
+        <item name="colorPrimaryDark">@color/material_brown_700</item>
+        <item name="colorAccent">@color/material_brown_200</item>
+        <item name="colorMaterial100">@color/material_brown_900</item>
+        <item name="colorMaterial300">@color/material_brown_500</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.Grey">
+        <item name="colorPrimary">@color/material_grey_300</item>
+        <item name="colorPrimaryDark">@color/material_grey_700</item>
+        <item name="colorAccent">@color/material_grey_200</item>
+        <item name="colorMaterial100">@color/material_grey_900</item>
+        <item name="colorMaterial300">@color/material_grey_500</item>
+    </style>
+
+    <style name="Theme.BITSBox.Dialog.BlueGrey">
+        <item name="colorPrimary">@color/material_blue_grey_300</item>
+        <item name="colorPrimaryDark">@color/material_blue_grey_700</item>
+        <item name="colorAccent">@color/material_blue_grey_200</item>
+        <item name="colorMaterial100">@color/material_blue_grey_900</item>
+        <item name="colorMaterial300">@color/material_blue_grey_500</item>
+    </style>
+
+</resources>

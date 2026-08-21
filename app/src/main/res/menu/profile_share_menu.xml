@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_group_qr"
+        android:icon="@drawable/ic_social_share"
+        android:title="@string/share"
+        app:iconTint="?attr/mainIconText" />
+    <item
+        android:id="@+id/action_group_clipboard"
+        android:icon="@drawable/baseline_send_24"
+        android:title="@string/action_export"
+        app:iconTint="?attr/mainIconText" />
+    <item
+        android:id="@+id/action_group_configuration"
+        android:icon="@drawable/ic_action_description"
+        android:title="@string/config_label"
+        app:iconTint="?attr/mainIconText" />
+</menu>

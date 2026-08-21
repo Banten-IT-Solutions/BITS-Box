@@ -1,0 +1,31 @@
+*.iml
+.gradle
+.idea
+.vscode
+.DS_Store
+build/
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+/app/libs/
+
+/service_account_credentials.json
+jniLibs/
+/library/libcore_build/
+.idea/deploymentTargetDropDown.xml
+/nkmr
+
+# submodules
+/external
+release.keystore
+.kotlin/
+
+# Eclipse IDE
+.project
+.classpath
+.settings/
+external/
+app/libs/*.aar
+.cxx/
+.externalNativeBuild/

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Popup window background wrapper for popups that open UPWARD
+  (e.g. the bottom navigation "More" menu). Only the top corners are
+  rounded so the square bottom edge visually connects to the anchor below.
+  See bg_popup_window.xml for the ripple/opacity rationale.
+-->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?attr/colorPrimary">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="?attr/colorPrimary" />
+            <corners
+                android:topLeftRadius="16dp"
+                android:topRightRadius="16dp"
+                android:bottomLeftRadius="0dp"
+                android:bottomRightRadius="0dp" />
+        </shape>
+    </item>
+</ripple>

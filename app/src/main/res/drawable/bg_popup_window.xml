@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Popup window background wrapper.
+
+  IMPORTANT: do NOT use a plain opaque <shape> here. PopupWindow sets the
+  window format from background.getOpacity(); an opaque drawable produces an
+  OPAQUE window surface which renders as a raw BLACK box until the first frame
+  is drawn (visible as a black flash before the popup animation).
+  RippleDrawable.getOpacity() always returns TRANSLUCENT, which avoids the
+  flash while keeping the solid primary-colored appearance.
+-->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?attr/colorPrimary">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="?attr/colorPrimary" />
+            <corners android:radius="16dp" />
+        </shape>
+    </item>
+</ripple>

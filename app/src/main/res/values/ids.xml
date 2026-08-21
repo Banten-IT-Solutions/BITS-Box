@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- IDs previously defined in the removed nav drawer menu, still used by MainActivity. -->
+<resources>
+    <item name="nav_configuration" type="id" />
+    <item name="nav_traffic" type="id" />
+</resources>

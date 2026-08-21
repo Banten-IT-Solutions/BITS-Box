@@ -1,0 +1,58 @@
+/*******************************************************************************
+ *                                                                             *
+ *  Copyright (C) 2017 by Max Lv <[Email0]>                          *
+ *  Copyright (C) 2017 by Mygod Studio <[Email1]>  *
+ *                                                                             *
+ *  This program is free software: you can redistribute it and/or modify       *
+ *  it under the terms of the GNU General Public License as published by       *
+ *  the Free Software Foundation, either version 3 of the License, or          *
+ *  (at your option) any later version.                                        *
+ *                                                                             *
+ *  This program is distributed in the hope that it will be useful,            *
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of             *
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the              *
+ *  GNU General Public License for more details.                               *
+ *                                                                             *
+ *  You should have received a copy of the GNU General Public License          *
+ *  along with this program. If not, see <http://www.gnu.org/licenses/>.       *
+ *                                                                             *
+ *******************************************************************************/
+
+package id.bits.box.ui
+
+import android.app.Activity
+import android.content.pm.ShortcutManager
+import android.os.Build
+import android.os.Bundle
+import androidx.core.content.getSystemService
+import id.bits.box.BitsBoxApp
+import id.bits.box.aidl.IBitsBoxService
+import id.bits.box.bg.BaseService
+import id.bits.box.bg.BitsBoxConnection
+
+class QuickEnableShortcut : Activity(), BitsBoxConnection.Callback {
+    private val connection = BitsBoxConnection(BitsBoxConnection.CONNECTION_ID_SHORTCUT)
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        connection.connect(this, this)
+        if (Build.VERSION.SDK_INT >= 25) {
+            getSystemService<ShortcutManager>()!!.reportShortcutUsed("enable")
+        }
+    }
+
+    override fun onServiceConnected(service: IBitsBoxService) {
+        val state = BaseService.State.values()[service.state]
+        if (state == BaseService.State.Stopped) {
+            BitsBoxApp.startService()
+        }
+        finish()
+    }
+
+    override fun stateChanged(state: BaseService.State, profileName: String?, msg: String?) {}
+
+    override fun onDestroy() {
+        connection.disconnect(this)
+        super.onDestroy()
+    }
+}

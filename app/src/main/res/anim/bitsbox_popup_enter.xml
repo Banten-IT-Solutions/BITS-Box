@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  No-op popup window animation.
+
+  Popup windows inherit the platform's default grow/scale animation when
+  android:popupAnimationStyle is not set. During that scale animation the
+  outer part of the popup window rect is transparent, so the window behind it
+  (the activity) shows through as a white (light mode) / black (night mode)
+  box before the primary-colored menu content covers it.
+
+  This animation keeps alpha at 1.0 for a single millisecond, so the popup
+  appears instantly, fully primary-colored, with no box behind it.
+-->
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="1">
+    <alpha
+        android:fromAlpha="1.0"
+        android:toAlpha="1.0" />
+</set>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <!-- Dependency versions are intentionally capped for toolchain compatibility
+         (AGP 8.9.1 / Kotlin 2.0.21 / Java 17). Newer releases require AGP 9.1+ / Kotlin 2.2+.
+         Upgrade path: bump AGP to 9.1.0 and Kotlin to 2.2.0 when the migration is ready. -->
+    <issue id="GradleDependency" severity="ignore" />
+</lint>

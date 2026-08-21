@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Rounded popup container for the DropDownListView / Spinner dropdown.
+     Fully primary colored - replaces the white AppCompat 9-patch
+     (abc_popup_background_mtrl_mult) that caused a white/black rounded box
+     with a visible gap around the menu. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="?attr/colorPrimary" />
+    <corners android:radius="16dp" />
+</shape>

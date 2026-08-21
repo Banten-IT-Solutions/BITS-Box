@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    app:cardBackgroundColor="?attr/colorSurfaceContainerLow"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="3dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Subscription update progress (slim, only while updating) -->
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/subscription_update_progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="gone"
+            app:indicatorColor="?attr/colorPrimary"
+            app:trackCornerRadius="2dp"
+            app:trackThickness="3dp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp">
+
+            <!-- Group name -->
+            <TextView
+                android:id="@+id/group_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:nextFocusRight="@+id/edit"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:textColor="?attr/ContentIconText"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/group_update"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/group_name" />
+
+            <!-- Group user (subscription username, hidden when blank) -->
+            <TextView
+                android:id="@+id/group_user"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textAppearance="?attr/textAppearanceBodySmall"
+                android:textColor="?attr/ContentIconText"
+                app:layout_constraintEnd_toStartOf="@id/options"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/group_name"
+                tools:text="user name" />
+
+            <!-- Update button (subscriptions only, refresh icon) -->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/group_update"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/group_update"
+                android:focusable="true"
+                android:padding="4dp"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toStartOf="@id/edit"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_baseline_refresh_24"
+                app:tint="?attr/ContentIconText" />
+
+            <!-- Edit button -->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/edit"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/edit"
+                android:focusable="true"
+                android:padding="4dp"
+                app:layout_constraintEnd_toStartOf="@id/options"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_image_edit" />
+
+            <!-- Options (more) button -->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/options"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:focusable="true"
+                android:padding="4dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_baseline_more_vert_24"
+                app:tint="?attr/ContentIconText" />
+
+            <!-- Chips row: type + status + traffic + expire (compact, like profile card).
+                 Wrapped in a horizontal scroll so long status/traffic text never clips. -->
+            <HorizontalScrollView
+                android:id="@+id/chip_scroll"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:scrollbars="none"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/group_user">
+
+                <LinearLayout
+                    android:id="@+id/chip_row"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                <!-- Group type chip (neutral, same as profile chips) -->
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/group_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="4dp"
+                    android:maxLines="1"
+                    android:paddingStart="6dp"
+                    android:paddingEnd="6dp"
+                    android:textAppearance="?attr/textAppearanceLabelMedium"
+                    android:textColor="?attr/ContentIconText"
+                    app:chipBackgroundColor="?attr/colorPrimary"
+                    app:chipMinHeight="20dp"
+                    app:chipStrokeWidth="0dp"
+                    app:ensureMinTouchTargetSize="false"
+                    tools:text="@string/subscription" />
+
+                <!-- Status chip: proxy count / empty state / last updated -->
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/group_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="4dp"
+                    android:maxLines="1"
+                    android:paddingStart="6dp"
+                    android:paddingEnd="6dp"
+                    android:textAppearance="?attr/textAppearanceLabelMedium"
+                    android:textColor="?attr/ContentIconText"
+                    app:chipBackgroundColor="@color/color_status_success"
+                    app:chipMinHeight="20dp"
+                    app:chipStrokeWidth="0dp"
+                    app:ensureMinTouchTargetSize="false"
+                    tools:text="@string/group_status_empty" />
+
+                <!-- Traffic chip: used / remaining (hidden when no usage) -->
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/group_traffic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="4dp"
+                    android:maxLines="1"
+                    android:paddingStart="6dp"
+                    android:paddingEnd="6dp"
+                    android:textAppearance="?attr/textAppearanceLabelMedium"
+                    android:textColor="@android:color/white"
+                    android:visibility="gone"
+                    app:chipBackgroundColor="@color/material_cyan_500"
+                    app:chipMinHeight="20dp"
+                    app:chipStrokeWidth="0dp"
+                    app:ensureMinTouchTargetSize="false"
+                    tools:text="@string/subscription_traffic" />
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <EditTextPreference
+        app:icon="@drawable/ic_social_emoji_symbols"
+        app:key="routeName"
+        app:title="@string/route_name"
+        app:useSimpleSummaryProvider="true" />
+    <id.bits.box.ui.EditConfigPreference
+        app:icon="@drawable/ic_baseline_layers_24"
+        app:key="serverConfig"
+        app:title="@string/custom_config"
+        app:useSimpleSummaryProvider="true" />
+    <PreferenceCategory app:title="@string/cag_route">
+        <id.bits.box.widget.AppListPreference
+            app:icon="@drawable/ic_baseline_legend_toggle_24"
+            app:key="routePackages"
+            app:title="@string/apps" />
+        <EditTextPreference
+            app:icon="@drawable/ic_baseline_domain_24"
+            app:key="routeDomain"
+            app:title="@string/route_domain"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+            app:icon="@drawable/ic_baseline_add_road_24"
+            app:key="routeIP"
+            app:title="@string/route_ip_destination"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:icon="@drawable/ic_maps_directions_boat"
+            app:key="routePort"
+            app:title="@string/route_port_destination"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+            app:icon="@drawable/ic_baseline_local_bar_24"
+            app:key="routeSource"
+            app:title="@string/route_ip_source"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+            app:icon="@drawable/ic_baseline_home_24"
+            app:key="routeSourcePort"
+            app:title="@string/route_port_source"
+            app:useSimpleSummaryProvider="true" />
+        <id.bits.box.ui.SimpleMenuPreference
+            app:entries="@array/route_protocol_entry"
+            app:entryValues="@array/route_protocol_value"
+            app:icon="@drawable/ic_baseline_compare_arrows_24"
+            app:key="routeNetwork"
+            app:title="@string/route_network"
+            app:useSimpleSummaryProvider="true" />
+        <EditTextPreference
+            app:icon="@drawable/ic_baseline_layers_24"
+            app:key="routeProtocol"
+            app:title="@string/route_protocol"
+            app:useSimpleSummaryProvider="true" />
+        <id.bits.box.widget.OutboundPreference
+            app:icon="@drawable/ic_hardware_router"
+            app:key="routeOutbound"
+            app:title="@string/route_outbound"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+</PreferenceScreen>
