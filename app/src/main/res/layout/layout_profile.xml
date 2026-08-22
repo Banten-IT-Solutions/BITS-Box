@@ -120,10 +120,12 @@
                 android:layout_height="20dp"
                 android:layout_marginEnd="4dp"
                 android:maxLines="1"
+                android:maxWidth="140dp"
                 android:paddingStart="6dp"
                 android:paddingEnd="6dp"
                 android:textAppearance="?attr/textAppearanceLabelMedium"
                 app:chipBackgroundColor="?attr/colorSurfaceContainerLowest"
+                android:ellipsize="end"
                 app:chipMinHeight="20dp"
                 app:chipStrokeWidth="0dp"
                 app:ensureMinTouchTargetSize="false"
@@ -186,16 +188,14 @@
 
             <TextView
                 android:id="@+id/profile_address"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:text="@string/server_address"
                 android:textAppearance="?attr/textAppearanceBodySmall"
                 android:textColor="@color/card_address_text" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
