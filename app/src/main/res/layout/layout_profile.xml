@@ -88,17 +88,17 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_action_delete" />
 
-        <!-- Chips row left: Type + Status (below name) -->
+        <!-- Chips row left: Type + Status (vertically locked to chip_row_right
+             so both bands stay symmetric regardless of name text metrics) -->
         <LinearLayout
             android:id="@+id/chip_row_left"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
             android:gravity="center_vertical|start"
             android:orientation="horizontal"
             app:layout_constraintEnd_toStartOf="@id/chip_row_right"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/profile_name">
+            app:layout_constraintTop_toTopOf="@id/chip_row_right">
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/profile_type"

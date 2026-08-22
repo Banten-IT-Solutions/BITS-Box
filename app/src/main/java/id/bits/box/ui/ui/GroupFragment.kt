@@ -327,6 +327,7 @@ class GroupFragment : ToolbarFragment(R.layout.layout_group),
         val groupType = binding.groupType
         val groupStatus = binding.groupStatus
         val groupTraffic = binding.groupTraffic
+        val groupUpdated = binding.groupUpdated
         val groupUser = binding.groupUser
         val editButton = binding.edit
         val optionsButton = binding.options
@@ -512,6 +513,17 @@ class GroupFragment : ToolbarFragment(R.layout.layout_group),
                     )
                     groupTraffic.setTextColor(Color.WHITE)
                 }
+            }
+
+            // Updated chip: last subscription update date (dd/MM/yyyy)
+            val lastUpdated = proxyGroup.subscription?.lastUpdated ?: 0
+            if (proxyGroup.type == GroupType.SUBSCRIPTION && lastUpdated > 0) {
+                groupUpdated.isVisible = true
+                groupUpdated.text = java.text.SimpleDateFormat(
+                    "dd/MM/yyyy", Locale.getDefault()
+                ).format(Date(lastUpdated * 1000L))
+            } else {
+                groupUpdated.isVisible = false
             }
 
             groupUser.text = subscription?.username ?: ""

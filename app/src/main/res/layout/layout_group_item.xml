@@ -36,6 +36,7 @@
                 android:id="@+id/group_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:nextFocusRight="@+id/edit"
@@ -46,21 +47,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="@string/group_name" />
-
-            <!-- Group user (subscription username, hidden when blank) -->
-            <TextView
-                android:id="@+id/group_user"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:textAppearance="?attr/textAppearanceBodySmall"
-                android:textColor="?attr/ContentIconText"
-                app:layout_constraintEnd_toStartOf="@id/options"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/group_name"
-                tools:text="user name" />
 
             <!-- Update button (subscriptions only, refresh icon) -->
             <androidx.appcompat.widget.AppCompatImageView
@@ -103,58 +89,17 @@
                 app:srcCompat="@drawable/ic_baseline_more_vert_24"
                 app:tint="?attr/ContentIconText" />
 
-            <!-- Chips row: type + status + traffic + expire (compact, like profile card).
-                 Wrapped in a horizontal scroll so long status/traffic text never clips. -->
-            <HorizontalScrollView
-                android:id="@+id/chip_scroll"
-                android:layout_width="0dp"
+            <!-- Chips row right: traffic + last updated (below action icons, anchor band).
+                 Stays in layout even when both chips are GONE so the left band keeps its position. -->
+            <LinearLayout
+                android:id="@+id/chip_row_right"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:scrollbars="none"
+                android:gravity="center_vertical|end"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/group_user">
-
-                <LinearLayout
-                    android:id="@+id/chip_row"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                <!-- Group type chip (neutral, same as profile chips) -->
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/group_type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_marginEnd="4dp"
-                    android:maxLines="1"
-                    android:paddingStart="6dp"
-                    android:paddingEnd="6dp"
-                    android:textAppearance="?attr/textAppearanceLabelMedium"
-                    android:textColor="?attr/ContentIconText"
-                    app:chipBackgroundColor="?attr/colorPrimary"
-                    app:chipMinHeight="20dp"
-                    app:chipStrokeWidth="0dp"
-                    app:ensureMinTouchTargetSize="false"
-                    tools:text="@string/subscription" />
-
-                <!-- Status chip: proxy count / empty state / last updated -->
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/group_status"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_marginEnd="4dp"
-                    android:maxLines="1"
-                    android:paddingStart="6dp"
-                    android:paddingEnd="6dp"
-                    android:textAppearance="?attr/textAppearanceLabelMedium"
-                    android:textColor="?attr/ContentIconText"
-                    app:chipBackgroundColor="@color/color_status_success"
-                    app:chipMinHeight="20dp"
-                    app:chipStrokeWidth="0dp"
-                    app:ensureMinTouchTargetSize="false"
-                    tools:text="@string/group_status_empty" />
+                app:layout_constraintTop_toBottomOf="@id/edit">
 
                 <!-- Traffic chip: used / remaining (hidden when no usage) -->
                 <com.google.android.material.chip.Chip
@@ -174,9 +119,96 @@
                     app:ensureMinTouchTargetSize="false"
                     tools:text="@string/subscription_traffic" />
 
+                <!-- Last updated chip: subscription update date dd/MM/yyyy (hidden when never updated) -->
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/group_updated"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:maxLines="1"
+                    android:paddingStart="6dp"
+                    android:paddingEnd="6dp"
+                    android:textAppearance="?attr/textAppearanceLabelMedium"
+                    android:textColor="?attr/ContentIconText"
+                    android:visibility="gone"
+                    app:chipBackgroundColor="?attr/colorPrimary"
+                    app:chipMinHeight="20dp"
+                    app:chipStrokeWidth="0dp"
+                    app:ensureMinTouchTargetSize="false"
+                    tools:text="12/08/2026" />
+
+            </LinearLayout>
+
+            <!-- Chips row left: type + status (vertically locked to chip_row_right
+                 so both bands stay symmetric regardless of name text metrics).
+                 Wrapped in a horizontal scroll so long status text never clips. -->
+            <HorizontalScrollView
+                android:id="@+id/chip_scroll"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                app:layout_constraintEnd_toStartOf="@id/chip_row_right"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/chip_row_right">
+
+                <LinearLayout
+                    android:id="@+id/chip_row"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <!-- Group type chip (neutral, same as profile chips) -->
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/group_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="4dp"
+                        android:maxLines="1"
+                        android:paddingStart="6dp"
+                        android:paddingEnd="6dp"
+                        android:textAppearance="?attr/textAppearanceLabelMedium"
+                        android:textColor="?attr/ContentIconText"
+                        app:chipBackgroundColor="?attr/colorPrimary"
+                        app:chipMinHeight="20dp"
+                        app:chipStrokeWidth="0dp"
+                        app:ensureMinTouchTargetSize="false"
+                        tools:text="@string/subscription" />
+
+                    <!-- Status chip: proxy count / empty state / last updated -->
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/group_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="4dp"
+                        android:maxLines="1"
+                        android:paddingStart="6dp"
+                        android:paddingEnd="6dp"
+                        android:textAppearance="?attr/textAppearanceLabelMedium"
+                        android:textColor="?attr/ContentIconText"
+                        app:chipBackgroundColor="@color/color_status_success"
+                        app:chipMinHeight="20dp"
+                        app:chipStrokeWidth="0dp"
+                        app:ensureMinTouchTargetSize="false"
+                        tools:text="@string/group_status_empty" />
+
                 </LinearLayout>
 
             </HorizontalScrollView>
+
+            <!-- Group user (subscription username, hidden when blank) -->
+            <TextView
+                android:id="@+id/group_user"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textAppearance="?attr/textAppearanceBodySmall"
+                android:textColor="?attr/ContentIconText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chip_scroll"
+                tools:text="user name" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
