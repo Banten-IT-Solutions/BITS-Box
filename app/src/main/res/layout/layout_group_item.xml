@@ -90,16 +90,19 @@
                 app:tint="?attr/ContentIconText" />
 
             <!-- Chips row right: traffic + last updated (below action icons, anchor band).
+                 Anchored to parent (28dp icon row + 10dp gap) instead of @id/edit, because
+                 edit goes GONE for the ungrouped group - a GONE anchor collapses to y=0 and
+                 would pull both chip bands up onto the name.
                  Stays in layout even when both chips are GONE so the left band keeps its position. -->
             <LinearLayout
                 android:id="@+id/chip_row_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="38dp"
                 android:gravity="center_vertical|end"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/edit">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <!-- Traffic chip: used / remaining (hidden when no usage) -->
                 <com.google.android.material.chip.Chip
