@@ -85,16 +85,10 @@ func NewHttpClient() HTTPClient {
 
 func (c *httpClient) ModernTLS() {
 	c.tls.MinVersion = tls.VersionTLS12
-	// c.tls.CipherSuites = bitsboxutils.Map(tls.CipherSuites(), func(it *tls.CipherSuite) uint16 { return it.ID })
 }
 
 func (c *httpClient) RestrictedTLS() {
 	c.tls.MinVersion = tls.VersionTLS13
-	// c.tls.CipherSuites = bitsboxutils.Map(bitsboxutils.Filter(tls.CipherSuites(), func(it *tls.CipherSuite) bool {
-	// 	return bitsboxutils.Contains(it.SupportedVersions, uint16(tls.VersionTLS13))
-	// }), func(it *tls.CipherSuite) uint16 {
-	// 	return it.ID
-	// })
 }
 
 func (c *httpClient) PinnedTLS12() {

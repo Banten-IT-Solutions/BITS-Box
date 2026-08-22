@@ -24,9 +24,6 @@ import (
 	"github.com/sagernet/sing/service/pause"
 )
 
-func init() {
-}
-
 var mainInstance *BoxInstance
 
 // CoreVersion is embedded at build time matching the checked-out sing-box
@@ -78,6 +75,7 @@ func NewSingBoxInstance(config string, localTransport LocalDNSTransport) (b *Box
 	// parse options
 	options, err := json.UnmarshalExtendedContext[option.Options](ctx, []byte(config))
 	if err != nil {
+		cancel()
 		return nil, fmt.Errorf("decode config: %v", err)
 	}
 
