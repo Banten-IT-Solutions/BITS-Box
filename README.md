@@ -50,7 +50,7 @@ BITS-Box/
 │   └── build.gradle.kts     # Module build script
 ├── libcore/                 # Go bindings shared with upstream sing-box
 ├── buildScript/             # Native build & CI scripts (Go, Android, assets)
-├── buildSrc/                # Gradle build logic (metadata, signing, APK naming)
+├── buildSrc/                # Gradle build logic (flavors, metadata, signing, APK naming)
 ├── .github/workflows/       # CI/CD workflows
 ├── build.gradle.kts         # Top-level Gradle build script
 ├── settings.gradle.kts      # Gradle module settings
@@ -78,6 +78,12 @@ make release-oss      # release, unsigned (signed with keystore if configured)
 ```
 
 Artifacts are written to `app/build/outputs/apk/`.
+
+The project has three product flavors — `oss` (default, FOSS), `play`
+(Google Play, AAB via `bundlePlayRelease`), and `preview` (preview channel,
+what the Preview CI workflow builds). Swap the suffix on any Make target,
+e.g. `make debug-play`, `make release-preview`, or build all with
+`make debug-all` / `make release-all`.
 
 ### Full build from scratch
 
@@ -122,7 +128,7 @@ Or via the `LOCAL_PROPERTIES` environment variable (base64-encoded).
 | Workflow | Trigger | Output |
 |----------|---------|--------|
 | `preview.yml` | `workflow_dispatch` | Preview APKs (artifact) |
-| `release.yml` | `workflow_dispatch` + tag | Signed release APKs + optional GitHub release / Play AAB |
+| `release.yml` | `workflow_dispatch` (with `tag`, `publish`, `play` inputs) | Signed release APKs + optional GitHub release / Play AAB |
 
 Both workflows fetch pinned external sources, build `bitscore.aar` from source with caching, and download GeoIP / GeoSite release assets before Gradle builds the APK. See `.github/workflows/` for details.
 
