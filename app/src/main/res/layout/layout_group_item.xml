@@ -34,6 +34,7 @@
             <!-- Group name -->
             <TextView
                 android:id="@+id/group_name"
+                tools:ignore="UnusedIds"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -107,6 +108,7 @@
                 <!-- Traffic chip: used / remaining (hidden when no usage) -->
                 <com.google.android.material.chip.Chip
                     android:id="@+id/group_traffic"
+                    tools:ignore="UnusedIds"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:layout_marginEnd="4dp"
@@ -125,6 +127,7 @@
                 <!-- Last updated chip: subscription update date dd/MM/yyyy (hidden when never updated) -->
                 <com.google.android.material.chip.Chip
                     android:id="@+id/group_updated"
+                    tools:ignore="UnusedIds"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:maxLines="1"
@@ -154,7 +157,6 @@
                 app:layout_constraintTop_toTopOf="@id/chip_row_right">
 
                 <LinearLayout
-                    android:id="@+id/chip_row"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
@@ -163,6 +165,7 @@
                     <!-- Group type chip (neutral, same as profile chips) -->
                     <com.google.android.material.chip.Chip
                         android:id="@+id/group_type"
+                        tools:ignore="UnusedIds"
                         android:layout_width="wrap_content"
                         android:layout_height="20dp"
                         android:layout_marginEnd="4dp"
@@ -180,6 +183,7 @@
                     <!-- Status chip: proxy count / empty state / last updated -->
                     <com.google.android.material.chip.Chip
                         android:id="@+id/group_status"
+                        tools:ignore="UnusedIds"
                         android:layout_width="wrap_content"
                         android:layout_height="20dp"
                         android:layout_marginEnd="4dp"
@@ -201,6 +205,7 @@
             <!-- Group user (subscription username, hidden when blank) -->
             <TextView
                 android:id="@+id/group_user"
+                tools:ignore="UnusedIds"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"

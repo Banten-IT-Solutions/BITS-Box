@@ -176,15 +176,9 @@
             @style/ThemeOverlay.MaterialComponents.MaterialAlertDialog.BITSBox
         </item>
 
-        <item name="windowFixedHeightMajor" type="dimen">95%</item>
 
         <item name="preferenceTheme">@style/PreferenceTheme.BITSBox</item>
 
-    </style>
-
-    <style name="AppearanceFoundation.Title" parent="TextAppearance.AppCompat.Title">
-        <item name="android:textColor">?attr/colorOnSurface</item>
-        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="ThemeOverlay.BITSBox.Light.ActionBar" parent="ThemeOverlay.AppCompat">

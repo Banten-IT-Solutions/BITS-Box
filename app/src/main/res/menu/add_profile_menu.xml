@@ -8,7 +8,6 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/action_add"
         android:icon="@drawable/ic_av_playlist_add"
         android:title="@string/add_profile"
         app:showAsAction="ifRoom">
@@ -37,7 +36,6 @@
     </item>
 
     <item
-        android:id="@+id/action_misc"
         android:icon="@drawable/ic_baseline_more_vert_24"
         android:title=""
         app:showAsAction="always">

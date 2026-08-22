@@ -108,7 +108,6 @@
     <color name="material_light_green_500">#8BC34A</color>
     <color name="material_light_green_700">#689F38</color>
     <color name="material_light_green_accent_200">#B2FF59</color>
-    <color name="material_light_white">#eeeeee</color>
     <color name="material_lime_100">#F0F4C3</color>
     <color name="material_lime_300">#DCE775</color>
     <color name="material_lime_500">#CDDC39</color>
@@ -184,11 +183,9 @@
 
     <color name="color_pink_ssr">#fb7299</color>
 
-    <color name="preference_simple_menu_background" value="@color/colorPrimary">#FAFAFA</color>
 
     
     <color name="color_status_success">#FF4CAF50</color>
-    <color name="color_status_warning">#FFFFC107</color>
     <color name="color_status_error">#FFF44336</color>
     <color name="color_chip_upload">#FF2196F3</color>
     <color name="color_chip_download">#FF009688</color>

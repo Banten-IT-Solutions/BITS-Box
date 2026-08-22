@@ -15,7 +15,6 @@
     app:strokeWidth="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/content_lin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
@@ -40,6 +39,7 @@
             <!-- Rule name - bold, primary -->
             <TextView
                 android:id="@+id/rule_name"
+                tools:ignore="UnusedIds"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -52,7 +52,6 @@
 
             <!-- Match criteria chip row 1 -->
             <LinearLayout
-                android:id="@+id/info_chips_row"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -60,6 +59,7 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/type_chip"
+                    tools:ignore="UnusedIds"
                     style="@style/Widget.Material3.Chip.Assist.Elevated"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
@@ -78,6 +78,7 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/outbound_chip"
+                    tools:ignore="UnusedIds"
                     style="@style/Widget.Material3.Chip.Assist.Elevated"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
@@ -110,6 +111,7 @@
             <!-- Enable toggle switch (Material 3 Switch) -->
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/enable_switch"
+                tools:ignore="UnusedIds"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"

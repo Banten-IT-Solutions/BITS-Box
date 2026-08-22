@@ -30,7 +30,6 @@
             android:scrollbars="none" />
 
         <com.blacksquircle.ui.editorkit.widget.TextScroller
-            android:id="@+id/scroller"
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_gravity="end"
@@ -47,6 +46,7 @@
 
         <ImageView
             android:id="@+id/action_tab"
+            tools:ignore="UnusedIds"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:background="?primaryOrTextPrimary"
@@ -66,6 +66,7 @@
 
         <ImageView
             android:id="@+id/action_undo"
+            tools:ignore="UnusedIds"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:background="?primaryOrTextPrimary"
@@ -75,6 +76,7 @@
 
         <ImageView
             android:id="@+id/action_redo"
+            tools:ignore="UnusedIds"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:background="?primaryOrTextPrimary"
@@ -84,6 +86,7 @@
 
         <ImageView
             android:id="@+id/action_format"
+            tools:ignore="UnusedIds"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:background="?primaryOrTextPrimary"

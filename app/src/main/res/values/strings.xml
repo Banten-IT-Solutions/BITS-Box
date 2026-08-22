@@ -3,11 +3,7 @@
     <string name="app_name" translatable="false">BITS Box</string>
     <string name="app_name_long" translatable="false">BITS Box for Android</string>
     <string name="app_desc">Professional VPN/proxy solution by Banten IT Solutions.</string>
-    <string name="project">Project</string>
-    <string name="github">Source code</string>
-    <string name="telegram">Telegram update channel</string>
     <string name="app_version">BITS Box</string>
-    <string name="version_x">BITS Box (%s)</string>
     <string name="about_sing_box">Singbox</string>
     <string name="about_website">Website</string>
     <string name="about_website_value">Banten IT Solutions</string>
@@ -15,14 +11,7 @@
     <string name="about_github">GitHub</string>
     <string name="about_github_value">BITS Box</string>
     <string name="about_github_url">https://github.com/Banten-IT-Solutions/BITS-Box</string>
-    <string name="about_privacy">Privacy Policy</string>
-    <string name="about_privacy_url">https://bits.co.id/privacy</string>
-    <string name="about_terms">Terms of Service</string>
-    <string name="about_terms_url">https://bits.co.id/terms</string>
-    <string name="about_license">Open Source License</string>
-    <string name="about_copyright">Banten IT Solutions</string>
     <string name="logcat">Export</string>
-    <string name="menu_configuration">Configuration</string>
     <string name="menu_home">Home</string>
     <string name="menu_group">Group</string>
     <string name="menu_about">About</string>
@@ -44,9 +33,6 @@
     <string name="group_create">Create group</string>
     <string name="update_all_subscription">Update all subscriptions</string>
     <string name="group_status_empty">Empty group</string>
-    <string name="group_status_empty_subscription">Not updated yet</string>
-    <string name="group_status_proxies">%d Proxies</string>
-    <string name="group_status_proxies_subscription">%1$d Proxies | Updated on %2$s</string>
     <string name="group_no_difference">%s: No difference</string>
     <string name="group_updated">%1$s: Updated %2$d proxies</string>
     <string name="group_diff">Diff (%s)</string>
@@ -99,12 +85,10 @@
     <string name="profile_name">Profile Name</string>
     <string name="server_address">Server</string>
     <string name="server_port">Remote Port</string>
-    <string name="username">Username</string>
     <string name="username_opt">Username (Optional)</string>
     <string name="password_opt">Password (Optional)</string>
     <string name="password">Password</string>
     <string name="enc_method">Encrypt Method</string>
-    <string name="protocol">Protocol</string>
     <string name="uuid">User ID</string>
     <string name="alter_id">Alter ID</string>
     <string name="security">Transport layer encryption</string>
@@ -119,7 +103,6 @@
     <string name="certificates">Certificates</string>
     <string name="early_data_header_name">Early Data Header Name</string>
     <string name="encryption">Encryption</string>
-    <string name="extra_headers">Extra Headers</string>
     <!-- feature category -->
     <string name="ipv6">IPv6 Route</string>
     <string name="prefer">Prefer</string>
@@ -190,7 +173,6 @@
         device.</string>
     <!-- alert category -->
     <string name="profile_empty">Please select a profile</string>
-    <string name="connect">Connect</string>
     <string name="clipboard_empty">Clipboard is empty</string>
     <!-- menu category -->
     <string name="settings">Settings</string>
@@ -210,7 +192,6 @@
     <string name="circular_reference">Circular reference</string>
     <string name="circular_reference_sum">The route cannot contain itself.</string>
     <string name="clear_profiles">Clear</string>
-    <string name="action_export_file">Export to file</string>
     <string name="action_export_clipboard">Copy</string>
     <string name="action_export">Export</string>
     <string name="action_import">Import Clipboard</string>
@@ -244,7 +225,6 @@
     <string name="vpn_connected">Connected, tap to check connection</string>
     <string name="not_connected">Not connected</string>
     <!-- subscriptions -->
-    <string name="subscriptions">Subscriptions</string>
     <string name="cleartext_http_warning">Cleartext HTTP traffic is insecure</string>
     <string name="error_title">Error</string>
     <string name="no_proxies_found">No proxies found in the link</string>
@@ -252,14 +232,11 @@
     <string name="no_proxies_found_in_file">No proxies found in the file</string>
     <string name="no_proxies_found_in_clipboard">No proxies found in the clipboard</string>
     <string name="deduplication">Deduplication</string>
-    <string name="donate">Donate</string>
-    <string name="donate_info">I love money</string>
     <string name="ignore_battery_optimizations">Ignore battery optimizations</string>
     <string name="ignore_battery_optimizations_sum">Remove some restrictions</string>
     <!-- plugin -->
     <string name="plugin">Plugin</string>
     <string name="plugin_configure">Configure…</string>
-    <string name="plugin_disabled">Disabled</string>
     <string name="proxy_cat">Server Settings</string>
     <string name="ss_cat">Shadowsocks Settings</string>
     <string name="unsaved_changes_prompt">Changes not saved. Do you want to save?</string>
@@ -267,7 +244,6 @@
     <string name="no">No</string>
     <string name="apply">Apply</string>
     <string name="need_reload">Reload proxy service to apply changes</string>
-    <string name="license">License</string>
     <string name="lines">%d Lines</string>
     <string name="night_mode">Night Mode</string>
     <string name="follow_system">System</string>
@@ -317,7 +293,6 @@
     <string name="subscription_update_message">Updating %s …</string>
     <string name="subscription_used">%s Used</string>
     <string name="subscription_traffic">%1$s Used / %2$s Remaining</string>
-    <string name="subscription_expire">Expire: %s</string>
     <string name="subscription_import">Import subscription</string>
     <string name="subscription_import_message">Confirm you want to import subscription %s? If you
         are coming from an untrusted source, doing this may result in your IP and this behavior
@@ -350,7 +325,6 @@
     <string name="profile_traffic_statistics">Profile Traffic Statistics</string>
     <string name="profile_traffic_statistics_summary">When disabled, the used traffic will not be
         counted</string>
-    <string name="menu_tools">Tools</string>
     <string name="menu_log">Logs</string>
      <string name="clear_logcat">Clear Logcat</string>
 
@@ -393,7 +367,6 @@
     <string name="move">Move</string>
     <string name="create_shortcut">Create Shortcut</string>
     <string name="app_tls_version">Subscription Min TLS Version</string>
-    <string name="hop_interval">Port Hopping Interval(second)</string>
     <string name="domain_strategy_for_remote">Domain strategy for Remote</string>
     <string name="domain_strategy_for_direct">Domain strategy for Direct</string>
     <string name="domain_strategy_for_server">Domain strategy for Server address</string>
@@ -412,8 +385,6 @@
     <string name="use_selector">Use selector</string>
     <string name="front_proxy">Front proxy</string>
     <string name="landing_proxy">Landing Proxy</string>
-    <string name="protocol_version">Protocol Version</string>
-    <string name="share_subscription">Share</string>
     <string name="show_group_in_notification">Show group name in notification</string>
     <string name="reset_connections">Reset Connections</string>
     <string name="remove_duplicate">Remove Duplicate</string>
@@ -440,16 +411,9 @@
     <string name="network_change_reset_connections">Reset outbound connections when network changes</string>
     <string name="wake_reset_connections">Reset outbound connections when device wake from sleep</string>
     <string name="preview_version_hint">This application is a preview version and may contain many problems. If you do not want to test it, please go to GitHub to download the Release version!</string>
-    <string name="check_update_preview">Check for preview version updates</string>
-    <string name="check_update_release">Check for release version updates</string>
-    <string name="update_dialog_title">New version available</string>
-    <string name="update_dialog_message">Current version: %1$s\nAvailable version: %2$s\nDo you want to download it?</string>
-    <string name="check_update_no">Check successful, but no updates.</string>
     <string name="reset_settings">Restore default settings</string>
     <string name="reset_settings_message">Restore default settings, but data such as nodes and groups will be retained. To completely clear data, clear application data directly in the system settings.</string>
     <string name="minimize">Minimize</string>
     <string name="app_list_permission_denied">Unable to read installed apps.\nThis is usually because the system has restricted app read permissions.\nPlease grant permissions in the system settings.</string>
     <string name="open_app_settings">Open System Settings</string>
-    <string name="rule_type">Rule Type</string>
-    <string name="export">Export</string>
 </resources>

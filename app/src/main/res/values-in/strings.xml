@@ -3,13 +3,8 @@
     <string name="app_name" translatable="false">BITS Box</string>
     <string name="app_name_long" translatable="false">BITS Box for Android</string>
     <string name="app_desc">Peranti VPN/proxy profesional oleh Banten IT Solutions.</string>
-    <string name="project">Proyek</string>
-    <string name="github">Kode sumber</string>
-    <string name="telegram">Saluran Telegram</string>
     <string name="app_version">Versi</string>
-    <string name="version_x">Versi (%s)</string>
     <string name="logcat">Ekspor</string>
-    <string name="menu_configuration">Konfigurasi</string>
     <string name="menu_home">Home</string>
     <string name="menu_group">Grup</string>
     <string name="menu_about">Tentang</string>
@@ -28,9 +23,6 @@
     <string name="group_create">Buat grup</string>
     <string name="update_all_subscription">Perbarui semua langganan</string>
     <string name="group_status_empty">Grup kosong</string>
-    <string name="group_status_empty_subscription">Belum diperbarui</string>
-    <string name="group_status_proxies">%d Proxy</string>
-    <string name="group_status_proxies_subscription">%1$d Proxy | Diperbarui pada %2$s</string>
     <string name="group_no_difference">%s: Tidak ada perbedaan</string>
     <string name="group_updated">%1$s: Diperbarui %2$d proxy</string>
     <string name="group_diff">Perbedaan (%s)</string>
@@ -76,12 +68,10 @@
     <string name="profile_name">Nama profil</string>
     <string name="server_address">Server</string>
     <string name="server_port">Port remot</string>
-    <string name="username">Nama pengguna</string>
     <string name="username_opt">Nama pengguna (opsional)</string>
     <string name="password_opt">Kata sandi (opsional)</string>
     <string name="password">Kata sandi</string>
     <string name="enc_method">Metode enkripsi</string>
-    <string name="protocol">Protokol</string>
     <string name="uuid">ID pengguna</string>
     <string name="alter_id">ID alter</string>
     <string name="security">Enkripsi lapisan transport</string>
@@ -96,7 +86,6 @@
     <string name="certificates">Sertifikat</string>
     <string name="early_data_header_name">Nama header data awal</string>
     <string name="encryption">Enkripsi</string>
-    <string name="extra_headers">Header ekstra</string>
     <!-- feature category -->
     <string name="ipv6">Rute IPv6</string>
     <string name="prefer">Lebih disukai</string>
@@ -155,7 +144,6 @@
     <string name="reboot_required">Gagal memulai layanan VPN. Anda mungkin perlu mem-boot ulang perangkat.</string>
     <!-- alert category -->
     <string name="profile_empty">Silakan pilih profil</string>
-    <string name="connect">Sambungkan</string>
     <string name="clipboard_empty">Papan klip kosong</string>
     <!-- menu category -->
     <string name="settings">Pengaturan</string>
@@ -174,7 +162,6 @@
     <string name="circular_reference">Referensi melingkar</string>
     <string name="circular_reference_sum">Rute tidak boleh mengandung dirinya sendiri.</string>
     <string name="clear_profiles">Bersihkan</string>
-    <string name="action_export_file">Ekspor ke berkas</string>
     <string name="action_export_clipboard">Ekspor ke papan klip</string>
     <string name="action_export">Ekspor</string>
     <string name="action_import">Impor Papan Klip</string>
@@ -207,7 +194,6 @@
     <string name="vpn_connected">Tersambung, ketuk untuk cek koneksi</string>
     <string name="not_connected">Tidak tersambung</string>
     <!-- subscriptions -->
-    <string name="subscriptions">Langganan</string>
     <string name="cleartext_http_warning">Lalu lintas HTTP tidak terenkripsi tidak aman</string>
     <string name="error_title">Kesalahan</string>
     <string name="no_proxies_found">Tidak ditemukan proxy di tautan</string>
@@ -215,14 +201,11 @@
     <string name="no_proxies_found_in_file">Tidak ditemukan proxy di berkas</string>
     <string name="no_proxies_found_in_clipboard">Tidak ditemukan proxy di papan klip</string>
     <string name="deduplication">Deduplikasi</string>
-    <string name="donate">Donasi</string>
-    <string name="donate_info">Saya suka uang</string>
     <string name="ignore_battery_optimizations">Abaikan pengoptimalan baterai</string>
     <string name="ignore_battery_optimizations_sum">Hapus beberapa pembatasan</string>
     <!-- plugin -->
     <string name="plugin">Plugin</string>
     <string name="plugin_configure">Konfigurasi…</string>
-    <string name="plugin_disabled">Dinonaktifkan</string>
     <string name="proxy_cat">Pengaturan server</string>
     <string name="ss_cat">Pengaturan Shadowsocks</string>
     <string name="unsaved_changes_prompt">Perubahan belum disimpan. Simpan?</string>
@@ -230,7 +213,6 @@
     <string name="no">Tidak</string>
     <string name="apply">Terapkan</string>
     <string name="need_reload">Muat ulang layanan proksi untuk menerapkan perubahan</string>
-    <string name="license">Lisensi</string>
     <string name="lines">%d baris</string>
     <string name="night_mode">Mode malam</string>
     <string name="follow_system">Sistem</string>
@@ -276,7 +258,6 @@
     <string name="subscription_update_message">Memperbarui %s …</string>
     <string name="subscription_used">%s digunakan</string>
     <string name="subscription_traffic">%1$s digunakan / %2$s tersisa</string>
-    <string name="subscription_expire">Kadaluarsa: %s</string>
     <string name="subscription_import">Impor langganan</string>
     <string name="subscription_import_message">Konfirmasi ingin mengimpor langganan %s? Jika dari sumber yang tidak dapat dipercaya, hal ini dapat mengungkapkan IP dan perilaku Anda.</string>
     <string name="profile_import">Impor profil</string>
@@ -300,7 +281,6 @@
 
     <string name="profile_traffic_statistics">Statistik lalu lintas profil</string>
     <string name="profile_traffic_statistics_summary">Ketika dinonaktifkan, lalu lintas yang digunakan tidak akan dihitung</string>
-    <string name="menu_tools">Alat</string>
     <string name="menu_log">Log</string>
      <string name="clear_logcat">Hapus logcat</string>
 
@@ -341,7 +321,6 @@
     <string name="move">Pindah</string>
     <string name="create_shortcut">Buat pintasan</string>
     <string name="app_tls_version">Versi min TLS langganan</string>
-    <string name="hop_interval">Interval lompatan port (detik)</string>
     <string name="domain_strategy_for_remote">Strategi domain untuk remot</string>
     <string name="domain_strategy_for_direct">Strategi domain untuk langsung</string>
     <string name="domain_strategy_for_server">Strategi domain untuk alamat server</string>
@@ -360,8 +339,6 @@
     <string name="use_selector">Gunakan pemilih</string>
     <string name="front_proxy">Proksi depan</string>
     <string name="landing_proxy">Proksi akhir</string>
-    <string name="protocol_version">Versi protokol</string>
-    <string name="share_subscription">Bagikan langganan</string>
     <string name="show_group_in_notification">Tampilkan nama grup di notifikasi</string>
     <string name="reset_connections">Reset koneksi</string>
     <string name="remove_duplicate">Remove Duplicate</string>
@@ -386,11 +363,6 @@
     <string name="network_change_reset_connections">Reset koneksi keluaran saat jaringan berubah</string>
     <string name="wake_reset_connections">Reset koneksi keluaran saat perangkat bangun dari tidur</string>
     <string name="preview_version_hint">Aplikasi ini adalah versi preview dan mungkin mengandung banyak masalah. Jika Anda tidak ingin menguji, silakan unduh versi Release di GitHub!</string>
-    <string name="check_update_preview">Periksa pembaruan versi preview</string>
-    <string name="check_update_release">Periksa pembaruan versi rilis</string>
-    <string name="update_dialog_title">Versi baru tersedia</string>
-    <string name="update_dialog_message">Versi saat ini: %1$s\nVersi tersedia: %2$s\nIngin mengunduh?</string>
-    <string name="check_update_no">Pemeriksaan berhasil, namun tidak ada pembaruan.</string>
     <string name="reset_settings">Pulihkan pengaturan default</string>
     <string name="reset_settings_message">Pulihkan pengaturan default, namun data seperti node dan grup akan dipertahankan. Untuk menghapus data sepenuhnya, hapus data aplikasi langsung di pengaturan sistem.</string>
     <string name="minimize">Perkecil</string>
