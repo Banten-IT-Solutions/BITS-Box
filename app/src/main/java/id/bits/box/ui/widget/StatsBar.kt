@@ -2,7 +2,6 @@ package id.bits.box.widget
 
 import android.content.Context
 import android.content.ContextWrapper
-import android.text.format.Formatter
 import android.util.AttributeSet
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
@@ -18,6 +17,7 @@ import id.bits.box.bg.BaseService
 import id.bits.box.database.DataStore
 import id.bits.box.ktx.*
 import id.bits.box.ui.MainActivity
+import id.bits.box.utils.formatTraffic
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -135,8 +135,8 @@ class StatsBar @JvmOverloads constructor(
     }
 
     fun updateSpeed(txRate: Long, rxRate: Long) {
-        val tx = context.getString(R.string.speed, Formatter.formatFileSize(context, txRate))
-        val rx = context.getString(R.string.speed, Formatter.formatFileSize(context, rxRate))
+        val tx = context.getString(R.string.speed, txRate.formatTraffic())
+        val rx = context.getString(R.string.speed, rxRate.formatTraffic())
         txText.text = "▲  $tx"
         rxText.text = "▼  $rx"
         txText.isVisible = txRate > 0L

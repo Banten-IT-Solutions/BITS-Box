@@ -4,7 +4,6 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
-import android.text.format.Formatter
 import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
@@ -29,6 +28,7 @@ import id.bits.box.widget.ListListener
 import id.bits.box.widget.QRCodeDialog
 import id.bits.box.widget.UndoSnackbarManager
 import kotlinx.coroutines.delay
+import id.bits.box.utils.formatTraffic
 import id.bits.box.utils.toBytesString
 import java.lang.NumberFormatException
 import java.util.*
@@ -456,17 +456,14 @@ class GroupFragment : ToolbarFragment(R.layout.layout_group),
                 groupTraffic.isVisible = true
                 groupTraffic.text = if (subscription.bytesRemaining > 0L) {
                     app.getString(
-                        R.string.subscription_traffic, Formatter.formatFileSize(
-                            app, subscription.bytesUsed
-                        ), Formatter.formatFileSize(
-                            app, subscription.bytesRemaining
-                        )
+                        R.string.subscription_traffic,
+                        subscription.bytesUsed.formatTraffic(),
+                        subscription.bytesRemaining.formatTraffic()
                     )
                 } else {
                     app.getString(
-                        R.string.subscription_used, Formatter.formatFileSize(
-                            app, subscription.bytesUsed
-                        )
+                        R.string.subscription_used,
+                        subscription.bytesUsed.formatTraffic()
                     )
                 }
                 groupTraffic.setChipBackgroundColor(

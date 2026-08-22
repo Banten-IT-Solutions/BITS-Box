@@ -9,7 +9,6 @@ import android.os.SystemClock
 import android.provider.OpenableColumns
 import android.text.SpannableStringBuilder
 import android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-import android.text.format.Formatter
 import android.text.style.ForegroundColorSpan
 import android.view.ContextThemeWrapper
 import android.view.Gravity
@@ -89,6 +88,7 @@ import id.bits.box.ui.profile.ShadowsocksSettingsActivity
 import id.bits.box.ui.profile.TrojanGoSettingsActivity
 import id.bits.box.ui.profile.TrojanSettingsActivity
 import id.bits.box.ui.profile.VMessSettingsActivity
+import id.bits.box.utils.formatTraffic
 import id.bits.box.widget.QRCodeDialog
 import id.bits.box.widget.UndoSnackbarManager
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -1579,8 +1579,8 @@ class ConfigurationFragment @JvmOverloads constructor(
                 uploadChip.isVisible = showTraffic
                 downloadChip.isVisible = showTraffic
                 if (showTraffic) {
-                    uploadChip.text = "↑ ${Formatter.formatFileSize(view.context, tx)}"
-                    downloadChip.text = "↓ ${Formatter.formatFileSize(view.context, rx)}"
+                    uploadChip.text = "↑ ${tx.formatTraffic()}"
+                    downloadChip.text = "↓ ${rx.formatTraffic()}"
                     uploadChip.setChipBackgroundColor(ColorStateList.valueOf(requireContext().getColour(R.color.color_chip_upload)))
                     downloadChip.setChipBackgroundColor(ColorStateList.valueOf(requireContext().getColour(R.color.color_chip_download)))
                     uploadChip.setTextColor(Color.WHITE)

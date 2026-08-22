@@ -12,7 +12,6 @@ import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_SYSTEM_EXEMPTED
 import android.os.Build
-import android.text.format.Formatter
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -29,6 +28,7 @@ import id.bits.box.ktx.getColorAttr
 import id.bits.box.ktx.runOnMainDispatcher
 import id.bits.box.ui.SwitchActivity
 import id.bits.box.utils.Theme
+import id.bits.box.utils.formatTraffic
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
@@ -64,15 +64,15 @@ class ServiceNotification(
             if (showDirectSpeed) {
                 val speedDetail = (service as Context).getString(
                     R.string.speed_detail, service.getString(
-                        R.string.speed, Formatter.formatFileSize(service, stats.txRateProxy)
+                        R.string.speed, stats.txRateProxy.formatTraffic()
                     ), service.getString(
-                        R.string.speed, Formatter.formatFileSize(service, stats.rxRateProxy)
-                    ), service.getString(
-                        R.string.speed,
-                        Formatter.formatFileSize(service, stats.txRateDirect)
+                        R.string.speed, stats.rxRateProxy.formatTraffic()
                     ), service.getString(
                         R.string.speed,
-                        Formatter.formatFileSize(service, stats.rxRateDirect)
+                        stats.txRateDirect.formatTraffic()
+                    ), service.getString(
+                        R.string.speed,
+                        stats.rxRateDirect.formatTraffic()
                     )
                 )
                 it.setStyle(NotificationCompat.BigTextStyle().bigText(speedDetail))
@@ -80,9 +80,9 @@ class ServiceNotification(
             } else {
                 val speedSimple = (service as Context).getString(
                     R.string.traffic, service.getString(
-                        R.string.speed, Formatter.formatFileSize(service, stats.txRateProxy)
+                        R.string.speed, stats.txRateProxy.formatTraffic()
                     ), service.getString(
-                        R.string.speed, Formatter.formatFileSize(service, stats.rxRateProxy)
+                        R.string.speed, stats.rxRateProxy.formatTraffic()
                     )
                 )
                 it.setContentText(speedSimple)
@@ -90,8 +90,8 @@ class ServiceNotification(
             it.setSubText(
                 service.getString(
                     R.string.traffic,
-                    Formatter.formatFileSize(service, stats.txTotal),
-                    Formatter.formatFileSize(service, stats.rxTotal)
+                    stats.txTotal.formatTraffic(),
+                    stats.rxTotal.formatTraffic()
                 )
             )
         }

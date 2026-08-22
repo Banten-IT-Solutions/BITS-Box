@@ -57,6 +57,18 @@ fun Long.toBytesString(): String {
     }
 }
 
+// Satuan & pembagi mengikuti Formatter.formatFileSize bawaan, hanya jumlah
+// desimal yang dibakukan ke 1 angka (mis. "34.3 kB").
+fun Long.formatTraffic(): String {
+    if (this < 1020L) return "$this B"
+    var value = this / 1024.0
+    for (unit in arrayOf("kB", "MB", "GB")) {
+        if (value < 1020.0) return "%.1f %s".format(value, unit)
+        value /= 1024.0
+    }
+    return "%.1f TB".format(value)
+}
+
 // List
 
 fun String.listByLineOrComma(): List<String> {
