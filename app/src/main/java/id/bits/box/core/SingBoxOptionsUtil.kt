@@ -2,6 +2,8 @@ package id.bits.box
 
 import id.bits.box.database.DataStore
 import id.bits.box.SingBoxOptions.RuleSet
+import id.bits.box.ktx.app
+import java.io.File
 
 object SingBoxOptionsUtil {
 
@@ -74,7 +76,12 @@ fun generateRuleSet(ruleSetString: List<String>, ruleSet: MutableList<RuleSet>) 
     // Hanya generate rule_set untuk kategori yang punya .srs file (minimal set).
     // Kategori lain gunakan direct reference dari .db file.
     val minimalCategories = setOf("rule-ads", "rule-indo", "id")
-    
+    // Local rule-set files live in the external assets directory - the same location
+    // the Go asset extractor writes to and the Assets screen manages. sing-box resolves
+    // relative local rule-set paths against its working directory (no_backup), so an
+    // absolute path is required for the core to actually find the files.
+    val assetsDir = app.getExternalFilesDir(null) ?: app.filesDir
+
     ruleSetString.forEach {
         when {
             it.startsWith("geoip:") -> {
@@ -84,7 +91,7 @@ fun generateRuleSet(ruleSetString: List<String>, ruleSet: MutableList<RuleSet>) 
                         type = "local"
                         tag = it
                         format = "binary"
-                        path = "geoip-${code}.srs"
+                        path = File(assetsDir, "geoip-${code}.srs").absolutePath
                     })
                 }
             }
@@ -96,7 +103,7 @@ fun generateRuleSet(ruleSetString: List<String>, ruleSet: MutableList<RuleSet>) 
                         type = "local"
                         tag = it
                         format = "binary"
-                        path = "geosite-${code}.srs"
+                        path = File(assetsDir, "geosite-${code}.srs").absolutePath
                     })
                 }
             }
