@@ -30,10 +30,17 @@ class StatsBar @JvmOverloads constructor(
     private lateinit var statusText: TextView
     private lateinit var txText: TextView
     private lateinit var rxText: TextView
-    lateinit var pingText: TextView
 
     var allowShow = true
     private var animating = false
+
+    /** Restores the status line to the current service state's label. */
+    private val restoreStatusRunnable = Runnable {
+        setStatus(app.getText(
+            if (DataStore.serviceState.connected) R.string.vpn_connected
+            else R.string.not_connected
+        ))
+    }
 
     override fun onFinishInflate() {
         super.onFinishInflate()
@@ -41,7 +48,6 @@ class StatsBar @JvmOverloads constructor(
         statusText = findViewById(R.id.status)
         txText = findViewById(R.id.tx)
         rxText = findViewById(R.id.rx)
-        pingText = findViewById(R.id.ping)
 
         setOnClickListener {
             if (DataStore.serviceState.connected) testConnection()
@@ -53,30 +59,11 @@ class StatsBar @JvmOverloads constructor(
         TooltipCompat.setTooltipText(this, text.toString())
     }
 
-    fun showPing(text: CharSequence) {
-        pingText.text = text
-        pingText.visibility = View.VISIBLE
-        statusText.visibility = View.INVISIBLE
-        pingText.alpha = 0f
-        pingText.animate()
-            .alpha(1f)
-            .setDuration(200)
-            .start()
-        postDelayed({
-            pingText.animate()
-                .alpha(0f)
-                .setDuration(200)
-                .withEndAction {
-                    pingText.visibility = View.GONE
-                    statusText.visibility = View.VISIBLE
-                }
-                .start()
-        }, 3000)
-    }
-
-    fun hidePing() {
-        pingText.visibility = View.GONE
-        statusText.visibility = View.VISIBLE
+    /** Shows [text] in the status line, restoring the state label after 3s. */
+    private fun showTemporaryStatus(text: CharSequence) {
+        removeCallbacks(restoreStatusRunnable)
+        setStatus(text)
+        postDelayed(restoreStatusRunnable, 3000)
     }
 
     private fun resolveActivity(): MainActivity? {
@@ -103,7 +90,6 @@ class StatsBar @JvmOverloads constructor(
                     rxText.visibility = View.VISIBLE
                     setStatus(app.getText(R.string.vpn_connected))
                 }
-                hidePing()
             }
             BaseService.State.Connecting -> {
                 postWhenStarted {
@@ -111,25 +97,21 @@ class StatsBar @JvmOverloads constructor(
                     rxText.visibility = View.GONE
                     setStatus(app.getText(R.string.connecting))
                 }
-                hidePing()
             }
             BaseService.State.Stopping -> {
                 setStatus(app.getText(R.string.stopping))
                 txText.visibility = View.GONE
                 rxText.visibility = View.GONE
-                hidePing()
             }
             BaseService.State.Stopped -> {
                 setStatus(app.getText(R.string.not_connected))
                 txText.visibility = View.GONE
                 rxText.visibility = View.GONE
-                hidePing()
             }
             else -> {
                 setStatus(app.getText(R.string.not_connected))
                 txText.visibility = View.GONE
                 rxText.visibility = View.GONE
-                hidePing()
             }
         }
     }
@@ -153,7 +135,7 @@ class StatsBar @JvmOverloads constructor(
                 val elapsed = activity.urlTest()
                 onMainDispatcher {
                     statusView.isEnabled = true
-                    showPing(activity.getString(
+                    showTemporaryStatus(activity.getString(
                         if (DataStore.connectionTestURL.startsWith("https://")) {
                             R.string.connection_test_available
                         } else {
@@ -165,7 +147,7 @@ class StatsBar @JvmOverloads constructor(
                 Logs.w(e.toString())
                 onMainDispatcher {
                     statusView.isEnabled = true
-                    showPing(e.readableMessage)
+                    showTemporaryStatus(e.readableMessage)
                     activity.snackbar(
                         activity.getString(
                             R.string.connection_test_error, e.readableMessage

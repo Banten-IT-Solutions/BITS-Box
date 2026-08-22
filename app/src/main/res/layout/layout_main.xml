@@ -82,17 +82,6 @@
                             android:textColor="?attr/colorOnSurface"
                             android:textSize="14sp"
                             tools:text="@string/vpn_connected" />
-
-                        <TextView
-                            android:id="@+id/ping"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="end"
-                            android:maxLines="1"
-                            android:textColor="?attr/colorOnSurfaceVariant"
-                            android:textSize="12sp"
-                            android:visibility="gone"
-                            tools:text="Ping: 42ms ✓" />
                     </LinearLayout>
 
                     <TextView
