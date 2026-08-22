@@ -1645,6 +1645,10 @@ class ConfigurationFragment @JvmOverloads constructor(
                 shareLayout.isGone = selectOrChain
                 editButton.isGone = select
                 removeButton.isGone = select
+                // Compact picker: hide type/ping chips (status logic above may
+                // have re-shown them, so override here at the end of bind)
+                profileType.isGone = select
+                profileStatus.isGone = select
 
                 proxyEntity.customBean?.apply {
                     shareLayout.isGone = true
