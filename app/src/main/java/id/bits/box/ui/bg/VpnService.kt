@@ -6,7 +6,6 @@ import android.app.Service
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.ProxyInfo
-import android.os.Build
 import android.os.ParcelFileDescriptor
 import android.os.PowerManager
 import id.bits.box.*
@@ -123,7 +122,7 @@ class VpnService : BaseVpnService(),
         }
 
         updateUnderlyingNetwork(builder)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) builder.setMetered(metered)
+        builder.setMetered(metered)
 
         // app route
         val packageName = packageName
@@ -185,12 +184,11 @@ class VpnService : BaseVpnService(),
             }
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q && DataStore.appendHttpProxy) {
+        if (DataStore.appendHttpProxy) {
             builder.setHttpProxy(ProxyInfo.buildDirectProxy(LOCALHOST, DataStore.mixedPort))
         }
 
         metered = DataStore.meteredNetwork
-        if (Build.VERSION.SDK_INT >= 29) builder.setMetered(metered)
         conn = builder.establish() ?: throw NullConnectionException()
 
         return conn!!.fd

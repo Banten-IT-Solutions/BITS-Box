@@ -5,7 +5,6 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.os.Build
 import id.bits.box.bg.SubscriptionUpdater
 import id.bits.box.database.DataStore
 import id.bits.box.ktx.app
@@ -34,7 +33,7 @@ class BootReceiver : BroadcastReceiver() {
 
         val doStart = when (intent.action) {
             Intent.ACTION_LOCKED_BOOT_COMPLETED -> false // DataStore.directBootAware
-            else -> Build.VERSION.SDK_INT < 24 || BitsBoxApp.user.isUserUnlocked
+            else -> BitsBoxApp.user.isUserUnlocked
         } && DataStore.selectedProxy > 0
 
         if (doStart) BitsBoxApp.startService()

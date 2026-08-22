@@ -2,14 +2,12 @@ package id.bits.box.bg
 
 import android.graphics.drawable.Icon
 import android.service.quicksettings.Tile
-import androidx.annotation.RequiresApi
 import id.bits.box.R
 import id.bits.box.BitsBoxApp
 import id.bits.box.aidl.IBitsBoxService
 import id.bits.box.database.BitsBoxDatabase
 import android.service.quicksettings.TileService as BaseTileService
 
-@RequiresApi(24)
 class TileService : BaseTileService(), BitsBoxConnection.Callback {
     private val iconIdle by lazy { Icon.createWithResource(this, R.drawable.ic_service_lock) }
     private val iconBusy by lazy { Icon.createWithResource(this, R.drawable.ic_service_lock_open) }

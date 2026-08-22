@@ -1,7 +1,6 @@
 package id.bits.box.ui
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -115,10 +114,6 @@ class SettingsPreferenceFragment : PreferenceFragmentCompat() {
 
         mixedPort.setOnBindEditTextListener(EditTextPreferenceModifiers.Port)
 
-        val metedNetwork = findPreference<Preference>(Key.METERED_NETWORK)!!
-        if (Build.VERSION.SDK_INT < 28) {
-            metedNetwork.remove()
-        }
         isProxyApps = findPreference(Key.PROXY_APPS)!!
         isProxyApps.setOnPreferenceChangeListener { _, newValue ->
             startActivity(Intent(activity, AppManagerActivity::class.java))

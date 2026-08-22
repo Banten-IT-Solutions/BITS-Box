@@ -367,9 +367,7 @@ import id.bits.box.utils.Util
         connectItem?.setIcon(iconRes)
         // Override bottom nav itemIconTint for connect icon to preserve
         // state-specific rocket colors (multi-color vector)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            connectItem?.setIconTintList(null)
-        }
+        connectItem?.setIconTintList(null)
         if (msg != null) snackbar(getString(R.string.vpn_error, msg)).show()
     }
 

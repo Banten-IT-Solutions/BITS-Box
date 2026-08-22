@@ -22,7 +22,6 @@ package id.bits.box.ui
 
 import android.app.Activity
 import android.content.pm.ShortcutManager
-import android.os.Build
 import android.os.Bundle
 import androidx.core.content.getSystemService
 import id.bits.box.BitsBoxApp
@@ -36,9 +35,7 @@ class QuickEnableShortcut : Activity(), BitsBoxConnection.Callback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         connection.connect(this, this)
-        if (Build.VERSION.SDK_INT >= 25) {
-            getSystemService<ShortcutManager>()!!.reportShortcutUsed("enable")
-        }
+        getSystemService<ShortcutManager>()!!.reportShortcutUsed("enable")
     }
 
     override fun onServiceConnected(service: IBitsBoxService) {

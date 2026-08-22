@@ -193,12 +193,10 @@
     <string name="add_profile_methods_scan_qr_code">Pindai kode QR</string>
     <string name="add_profile_methods_manual_settings">Manual</string>
     <plurals name="removed">
-        <item quantity="one">1 item dihapus</item>
         <item quantity="other">%d item dihapus</item>
     </plurals>
 
     <plurals name="added">
-        <item quantity="one">Ditambahkan</item>
         <item quantity="other">%d proxy ditambahkan</item>
     </plurals>
 

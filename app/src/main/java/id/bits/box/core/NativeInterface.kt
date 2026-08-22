@@ -5,10 +5,7 @@ import android.net.wifi.WifiInfo
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.wifi.WifiManager
-import android.os.Build
-import android.os.Build.VERSION_CODES
 import android.system.OsConstants
-import androidx.annotation.RequiresApi
 import id.bits.box.BitsBoxApp
 import id.bits.box.bg.ServiceNotification
 import id.bits.box.database.DataStore
@@ -41,10 +38,9 @@ class NativeInterface : BoxPlatformInterface, BITSBoxInterface {
     }
 
     override fun useProcFS(): Boolean {
-        return Build.VERSION.SDK_INT < Build.VERSION_CODES.Q
+        return false
     }
 
-    @RequiresApi(Build.VERSION_CODES.Q)
     override fun findConnectionOwner(
         ipProto: Int, srcIp: String, srcPort: Int, destIp: String, destPort: Int
     ): Int {

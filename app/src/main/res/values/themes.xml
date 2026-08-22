@@ -39,7 +39,7 @@
         <item name="tabSelectedTextColor">?colorOnPrimary</item>
         <item name="tabIndicatorColor">?colorOnPrimary</item>
         <item name="tabRippleColor">?colorOnPrimary</item>
-        <item name="android:forceDarkAllowed" tools:targetApi="29">false</item>
+        <item name="android:forceDarkAllowed">false</item>
         <item name="whiteOrTextPrimary">?colorOnPrimary</item>
         <item name="mainIconText">@color/white</item>
         <item name="ContentIconText">@color/black</item>
@@ -153,7 +153,7 @@
         <item name="tabSelectedTextColor">?colorOnPrimary</item>
         <item name="tabIndicatorColor">?colorOnPrimary</item>
         <item name="tabRippleColor">?colorOnPrimary</item>
-        <item name="android:forceDarkAllowed" tools:targetApi="29">false</item>
+        <item name="android:forceDarkAllowed">false</item>
         <item name="whiteOrTextPrimary">@color/white</item>
 
         <item name="windowActionModeOverlay">true</item>
@@ -279,9 +279,9 @@
         <!-- Items are full-width with opaque square backgrounds (SimpleMenuAdapter
              colors each row), so without clipping they poke out past the 16dp
              rounded corners of bg_dropdown_popup and the dropdown corners look
-             square / show an extra box. Clip the whole list to the rounded
-             background outline so rows are cut cleanly at the corners. -->
-        <item name="android:clipToOutline">true</item>
+             square / show an extra box. On API 31+ the whole list is clipped to
+             the rounded background outline (see values-v31) so rows are cut
+             cleanly at the corners. -->
         <item name="android:outlineProvider">background</item>
         <item name="android:divider">@null</item>
         <item name="android:dividerHeight">0dp</item>

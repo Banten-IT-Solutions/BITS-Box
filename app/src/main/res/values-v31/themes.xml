@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- android:clipToOutline as a style attribute requires API 31; on
+         API 29/30 the base theme simply skips corner clipping. -->
+    <style name="Widget.BITSBox.DropDownListView" parent="Widget.AppCompat.ListView">
+        <item name="android:clipToOutline">true</item>
+    </style>
+
+</resources>
