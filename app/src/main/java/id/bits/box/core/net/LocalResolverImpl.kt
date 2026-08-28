@@ -11,6 +11,7 @@ import libcore.ExchangeContext
 import libcore.LocalDNSTransport
 import java.net.InetAddress
 
+@Suppress("DEPRECATION")
 object LocalResolverImpl : LocalDNSTransport {
 
     // new local

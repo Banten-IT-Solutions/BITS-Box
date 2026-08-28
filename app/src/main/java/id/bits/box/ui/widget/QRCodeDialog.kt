@@ -12,7 +12,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.graphics.createBitmap
 import androidx.core.graphics.set
-import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.EncodeHintType
@@ -38,9 +37,10 @@ class QRCodeDialog() : DialogFragment() {
     override fun getTheme(): Int = Theme.getDialogTheme()
 
     constructor(url: String, displayName: String) : this() {
-        arguments = bundleOf(
-            Pair(KEY_URL, url), Pair(KEY_NAME, displayName)
-        )
+        arguments = Bundle().apply {
+            putString(KEY_URL, url)
+            putString(KEY_NAME, displayName)
+        }
     }
 
     /**

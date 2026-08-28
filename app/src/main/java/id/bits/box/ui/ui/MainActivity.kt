@@ -363,7 +363,7 @@ import id.bits.box.utils.Util
             BaseService.State.Connecting, BaseService.State.Stopping -> R.drawable.ic_cloud_connecting
             else -> R.drawable.ic_action_lock
         }
-        val connectItem = binding.bottomNav.menu?.findItem(R.id.nav_connect)
+        val connectItem = binding.bottomNav.menu.findItem(R.id.nav_connect)
         connectItem?.setIcon(iconRes)
         // Override bottom nav itemIconTint for connect icon to preserve
         // state-specific rocket colors (multi-color vector)
