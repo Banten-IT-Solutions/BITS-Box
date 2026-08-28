@@ -44,10 +44,10 @@ fun Project.setupCommon() {
     android.apply {
         buildToolsVersion = "37.0.0"
         ndkVersion = "29.0.14206865"
-        compileSdk = 36
+        compileSdk = 37
         defaultConfig {
             minSdk = 29
-            targetSdk = 36
+            targetSdk = 37
         }
         buildTypes {
             getByName("release") {

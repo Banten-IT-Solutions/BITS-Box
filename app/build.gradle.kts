@@ -2,7 +2,6 @@
 
 plugins {
     id("com.android.application")
-    id("kotlin-android")
     id("com.google.devtools.ksp")
     id("kotlin-parcelize")
 }
@@ -15,7 +14,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    
+
     tasks.withType<JavaCompile>().configureEach {
         options.compilerArgs.add("-Xlint:deprecation")
         options.compilerArgs.add("-Xlint:rawtypes")
@@ -44,7 +43,7 @@ android {
     androidResources {
         generateLocaleConfig = false
     }
-    
+
     buildTypes {
         release {
             isMinifyEnabled = true
@@ -57,13 +56,11 @@ android {
     }
 }
 
-
 dependencies {
-
     implementation(fileTree("libs"))
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.11.0")
-    implementation("androidx.core:core-ktx:1.18.0")
+    implementation("androidx.core:core-ktx:1.19.0")
     implementation("androidx.recyclerview:recyclerview:1.4.0")
     implementation("androidx.activity:activity-ktx:1.13.0")
     implementation("androidx.fragment:fragment-ktx:1.9.0")
