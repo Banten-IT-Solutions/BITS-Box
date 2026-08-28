@@ -9,10 +9,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: '📥 Checkout'
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: '☕ Setup JDK 21'
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@v6
         with:
           distribution: temurin
           java-version: 21
@@ -40,7 +40,7 @@ jobs:
 
       - name: '💾 Cache LibCore AAR'
         id: cache
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: |
             app/libs/bitscore.aar
@@ -48,7 +48,7 @@ jobs:
 
       - name: '🐹 Setup Go'
         if: steps.cache.outputs.cache-hit != 'true'
-        uses: actions/setup-go@v6
+        uses: actions/setup-go@v7
         with:
           go-version: '^1.25'
 
@@ -61,7 +61,7 @@ jobs:
         run: bash buildScript/lib/core/build.sh
 
       - name: '📤 Upload LibCore AAR'
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: bitscore-aar
           path: app/libs/bitscore.aar
@@ -73,10 +73,10 @@ jobs:
       - libcore
     steps:
       - name: '📥 Checkout'
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: '☕ Setup JDK 21'
-        uses: actions/setup-java@v5
+        uses: actions/setup-java@v6
         with:
           distribution: temurin
           java-version: 21
@@ -103,7 +103,7 @@ jobs:
           git ls-remote https://github.com/bitscoid/gomobile.git refs/heads/master >> deps_status
 
       - name: '📥 Restore LibCore AAR'
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: bitscore-aar
           path: app/libs
@@ -112,7 +112,7 @@ jobs:
         run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > release.keystore
 
       - name: '💾 Gradle Cache'
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: ~/.gradle
           key: gradle-${{ hashFiles('**/*.gradle.kts') }}
@@ -132,13 +132,13 @@ jobs:
           cp "$apk_dir"/*arm64-v8a*.apk artifacts/v8/
 
       - name: '📤 Upload Preview v7'
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: preview-v7
           path: artifacts/v7/*.apk
 
       - name: '📤 Upload Preview v8'
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: preview-v8
           path: artifacts/v8/*.apk
