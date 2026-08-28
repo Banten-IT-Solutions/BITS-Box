@@ -1,0 +1,58 @@
+{
+  "name": "bits-box",
+  "version": "1.0.0",
+  "private": true,
+  "description": "BITS Box — Android multi-protocol proxy client powered by sing-box",
+  "keywords": [
+    "android",
+    "kotlin",
+    "sing-box",
+    "vpn",
+    "proxy"
+  ],
+  "license": "GPL-3.0-only",
+  "type": "module",
+  "author": {
+    "name": "Banten IT Solutions",
+    "email": "admin@bits.co.id",
+    "url": "https://bits.co.id"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Banten-IT-Solutions/BITS-Box.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Banten-IT-Solutions/BITS-Box/issues"
+  },
+  "homepage": "https://bits.co.id",
+  "packageManager": "pnpm@10.10.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "prepare": "husky",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "prettier --check .",
+    "lint:fix": "prettier --write .",
+    "check": "prettier --check . && ./gradlew tasks --all",
+    "ktlint": "echo \"ktlint: run ./gradlew ktlintCheck if ktlint is configured\"",
+    "ktlint:fix": "echo \"ktlintFix: run ./gradlew ktlintFormat if ktlint is configured\""
+  },
+  "devDependencies": {
+    "husky": "9.1.7",
+    "lint-staged": "17.4.1",
+    "prettier": "3.9.6"
+  },
+  "lint-staged": {
+    "*.{js,ts,json,css,md,yml,yaml}": "prettier --write",
+    "*.{kt,kts}": "prettier --write",
+    "*.{xml,gradle}": "prettier --write"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run format:check"
+    }
+  }
+}

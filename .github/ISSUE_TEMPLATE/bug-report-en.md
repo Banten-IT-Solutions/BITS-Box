@@ -4,7 +4,6 @@ about: 'Please troubleshoot server-side issues and upgrade to the latest client 
 title: 'BUG: '
 labels: ''
 assignees: ''
-
 ---
 
 ## Describe the problem
