@@ -50,7 +50,7 @@ jobs:
 
       - name: '💾 Cache LibCore AAR'
         id: cache
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: |
             app/libs/bitscore.aar
@@ -122,7 +122,7 @@ jobs:
         run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > release.keystore
 
       - name: '💾 Gradle Cache'
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: ~/.gradle
           key: gradle-${{ hashFiles('**/*.gradle.kts') }}
@@ -238,7 +238,7 @@ jobs:
         run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > release.keystore
 
       - name: '💾 Gradle Cache'
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: ~/.gradle
           key: gradle-play-${{ hashFiles('**/*.gradle.kts') }}
