@@ -1,72 +1,72 @@
 version: 2
 updates:
   # ── GitHub Actions ────────────────────────────────────────────────
-  - package-ecosystem: 'github-actions'
-    directory: '/'
+  - package-ecosystem: "github-actions"
+    directory: "/"
     schedule:
-      interval: 'weekly'
-      day: 'monday'
-      time: '02:30'
+      interval: "weekly"
+      day: "monday"
+      time: "02:30"
     open-pull-requests-limit: 10
     labels:
-      - 'dependencies'
-      - 'github-actions'
+      - "dependencies"
+      - "github-actions"
     commit-message:
-      prefix: 'chore(deps):'
+      prefix: "chore(deps):"
     groups:
       actions:
         patterns:
-          - '*'
+          - "*"
         update-types:
-          - 'minor'
-          - 'patch'
+          - "minor"
+          - "patch"
 
   # ── Gradle (app + buildSrc) ─────────────────────────────────────
-  - package-ecosystem: 'gradle'
-    directory: '/'
+  - package-ecosystem: "gradle"
+    directory: "/"
     schedule:
-      interval: 'weekly'
-      day: 'monday'
-      time: '03:00'
+      interval: "weekly"
+      day: "monday"
+      time: "03:00"
     open-pull-requests-limit: 5
     labels:
-      - 'dependencies'
-      - 'gradle'
+      - "dependencies"
+      - "gradle"
     commit-message:
-      prefix: 'chore(deps):'
+      prefix: "chore(deps):"
     groups:
       gradle-deps:
         patterns:
-          - '*'
+          - "*"
         update-types:
-          - 'minor'
-          - 'patch'
+          - "minor"
+          - "patch"
     ignore:
-      - dependency-name: 'com.android.tools.build:gradle'
-        update-types: ['major']
-      - dependency-name: 'org.jetbrains.kotlin:kotlin-gradle-plugin'
-        update-types: ['major']
+      - dependency-name: "com.android.tools.build:gradle"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "org.jetbrains.kotlin:kotlin-gradle-plugin"
+        update-types: ["version-update:semver-major"]
 
   # ── Go modules (libcore) ────────────────────────────────────────
-  - package-ecosystem: 'gomod'
-    directory: '/libcore'
+  - package-ecosystem: "gomod"
+    directory: "/libcore"
     schedule:
-      interval: 'weekly'
-      day: 'monday'
-      time: '03:30'
+      interval: "weekly"
+      day: "monday"
+      time: "03:30"
     open-pull-requests-limit: 5
     labels:
-      - 'dependencies'
-      - 'gomod'
+      - "dependencies"
+      - "gomod"
     commit-message:
-      prefix: 'chore(deps):'
+      prefix: "chore(deps):"
     groups:
       go-deps:
         patterns:
-          - '*'
+          - "*"
         update-types:
-          - 'minor'
-          - 'patch'
+          - "minor"
+          - "patch"
     ignore:
-      - dependency-name: 'golang.org/x/mobile'
-        update-types: ['major']
+      - dependency-name: "golang.org/x/mobile"
+        update-types: ["version-update:semver-major"]
