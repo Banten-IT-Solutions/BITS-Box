@@ -1,17 +1,16 @@
 import com.android.build.api.dsl.ApplicationExtension
-import com.android.build.gradle.AbstractAppExtension
-import com.android.build.gradle.internal.api.BaseVariantOutputImpl
+import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
-import org.gradle.api.plugins.ExtensionAware
+import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.getByName
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 import java.util.Base64
 import java.util.Properties
-import kotlin.system.exitProcess
 
 private val Project.android get() = extensions.getByName<ApplicationExtension>("android")
+private val Project.androidComponents get() = extensions.getByName<ApplicationAndroidComponentsExtension>("androidComponents")
 
 private lateinit var metadata: Properties
 private lateinit var localProperties: Properties
@@ -28,10 +27,8 @@ fun Project.requireMetadata(): Properties {
 fun Project.requireLocalProperties(): Properties {
     if (!::localProperties.isInitialized) {
         localProperties = Properties()
-
         val base64 = System.getenv("LOCAL_PROPERTIES")
         if (!base64.isNullOrBlank()) {
-
             localProperties.load(Base64.getDecoder().decode(base64).inputStream())
         } else if (project.rootProject.file("local.properties").exists()) {
             localProperties.load(rootProject.file("local.properties").inputStream())
@@ -52,6 +49,13 @@ fun Project.setupCommon() {
         buildTypes {
             getByName("release") {
                 isMinifyEnabled = true
+                isShrinkResources = true
+            }
+            getByName("debug") {
+                isMinifyEnabled = false
+                applicationIdSuffix = ".debug"
+                isDebuggable = true
+                isJniDebuggable = true
             }
         }
         compileOptions {
@@ -63,8 +67,6 @@ fun Project.setupCommon() {
             checkAllWarnings = true
             checkReleaseBuilds = true
             warningsAsErrors = true
-            textOutput = project.file("build/lint.txt")
-            htmlOutput = project.file("build/lint.html")
         }
         packaging {
             resources.excludes.addAll(
@@ -82,25 +84,8 @@ fun Project.setupCommon() {
                     "okhttp3/**"
                 )
             )
-        }
-        (this as? AbstractAppExtension)?.apply {
-            buildTypes {
-                getByName("release") {
-                    isShrinkResources = true
-                }
-                getByName("debug") {
-                    applicationIdSuffix = "debug"
-                    debuggable(true)
-                    jniDebuggable(true)
-                }
-            }
-            applicationVariants.forEach { variant ->
-                variant.outputs.forEach {
-                    it as BaseVariantOutputImpl
-                    it.outputFileName = it.outputFileName.replace(
-                        "app", "${project.name}-" + variant.versionName
-                    ).replace("-release", "").replace("-oss", "")
-                }
+            jniLibs {
+                keepDebugSymbols.add("**/libgojni.so")
             }
         }
     }
@@ -153,8 +138,6 @@ fun Project.setupApp() {
     setupAppCommon()
 
     android.apply {
-        this as AbstractAppExtension
-
         buildTypes {
             getByName("release") {
                 proguardFiles(
@@ -172,7 +155,7 @@ fun Project.setupApp() {
             include("arm64-v8a")
         }
 
-        flavorDimensions += "vendor"
+        flavorDimensions.add("vendor")
         productFlavors {
             create("oss")
             create("play")
@@ -185,25 +168,26 @@ fun Project.setupApp() {
             }
         }
 
-        applicationVariants.all {
-            outputs.all {
-                this as BaseVariantOutputImpl
-                val isPreview = outputFileName.contains("-preview")
-                outputFileName = if (isPreview) {
-                    outputFileName.replace(
-                        project.name,
-                        "BITSBox-" + requireMetadata().getProperty("PRE_VERSION_NAME")
-                    ).replace("-preview", "")
-                } else {
-                    outputFileName.replace(project.name, "BITSBox-$versionName")
-                        .replace("-release", "")
-                        .replace("-oss", "")
-                }
-            }
-        }
-
         sourceSets.getByName("main").apply {
             jniLibs.srcDir("executableSo")
+        }
+    }
+
+    // Output file name via new androidComponents API (replaces BaseVariantOutputImpl)
+    androidComponents.onVariants { variant ->
+        val variantName = variant.name
+        val isPreview = variantName.contains("preview", ignoreCase = true)
+        variant.outputs.forEach { output ->
+            val original = output.outputFileName.get() ?: return@forEach
+            val version = if (isPreview) {
+                requireMetadata().getProperty("PRE_VERSION_NAME")
+            } else {
+                verName
+            }
+            val prefix = "BITSBox-$version"
+            var newName = original.replace("app", prefix)
+            newName = newName.replace("-release", "").replace("-oss", "").replace("-preview", "")
+            output.outputFileName.set(newName)
         }
     }
 }
