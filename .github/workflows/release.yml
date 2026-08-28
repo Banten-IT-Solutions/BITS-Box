@@ -71,7 +71,7 @@ jobs:
         run: bash buildScript/lib/core/build.sh
 
       - name: '📤 Upload LibCore AAR'
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: bitscore-aar
           path: app/libs/bitscore.aar
@@ -152,13 +152,13 @@ jobs:
           cp "$apk_dir"/*arm64-v8a*.apk artifacts/v8/
 
       - name: '📤 Upload Release v7'
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: release-v7
           path: artifacts/v7/*.apk
 
       - name: '📤 Upload Release v8'
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: release-v8
           path: artifacts/v8/*.apk
@@ -254,7 +254,7 @@ jobs:
           ./gradlew bundlePlayRelease
 
       - name: '📤 Upload AAB'
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: AAB
           path: app/build/outputs/bundle/playRelease/app-play-release.aab
