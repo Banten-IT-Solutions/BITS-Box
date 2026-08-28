@@ -113,7 +113,7 @@ jobs:
           git ls-remote https://github.com/bitscoid/gomobile.git refs/heads/master >> deps_status
 
       - name: '📥 Restore LibCore AAR'
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: bitscore-aar
           path: app/libs
@@ -175,7 +175,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: '📦 Download Artifacts'
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           path: artifacts
 
@@ -229,7 +229,7 @@ jobs:
           git ls-remote https://github.com/bitscoid/gomobile.git refs/heads/master >> deps_status
 
       - name: '📥 Restore LibCore AAR'
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: bitscore-aar
           path: app/libs
