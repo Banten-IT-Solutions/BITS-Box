@@ -70,7 +70,7 @@ BITS-Box/
 | Tool        | Version                                          |
 | ----------- | ------------------------------------------------ |
 | JDK         | **21** (pinned; JDK 17 also accepted for Gradle) |
-| Android SDK | `platforms;android-36`, `build-tools;37.0.0`     |
+| Android SDK | `platforms;android-37`, `build-tools;37.0.0`     |
 | Android NDK | `29.0.14206865`                                  |
 | Go          | 1.25+ (go.mod requires 1.25.0)                   |
 | Node.js     | 20+ (optional, for formatter & hooks)            |
@@ -116,18 +116,23 @@ Or using the CLI helper directly:
 
 ### Commands
 
-| Command                 | Description                      |
-| ----------------------- | -------------------------------- |
-| `make debug-oss`        | Build debug APK (oss flavor)     |
-| `make release-oss`      | Build release APK (oss)          |
-| `make debug-all`        | Build all debug flavors          |
-| `make release-all`      | Build all release flavors        |
-| `make build-full`       | Full clean build from scratch    |
-| `make lint`             | Run Android lint                 |
-| `pnpm format`           | Format all files with Prettier   |
-| `pnpm format:check`     | Check formatting without writing |
-| `pnpm check`            | Format check + Gradle tasks      |
-| `./gradlew tasks --all` | List all Gradle tasks            |
+| Command                 | Description                               |
+| ----------------------- | ----------------------------------------- |
+| `make debug-oss`        | Build debug APK (oss flavor)              |
+| `make release-oss`      | Build release APK (oss)                   |
+| `make bundle-play`      | Build Play AAB (`bundlePlayRelease`)      |
+| `make debug-all`        | Build all debug flavors                   |
+| `make release-all`      | Build all release flavors                 |
+| `make build-full`       | Full clean build from scratch             |
+| `make lint`             | Run Android lint                          |
+| `make format`           | Format all files (Prettier, via Makefile) |
+| `make format-check`     | Check formatting (Makefile)               |
+| `make check`            | `format-check` + `KSP` + `AAR metadata`   |
+| `make wrapper`          | Update Gradle wrapper                     |
+| `pnpm format`           | Format all files with Prettier            |
+| `pnpm format:check`     | Check formatting without writing          |
+| `pnpm check`            | Format check + Gradle tasks               |
+| `./gradlew tasks --all` | List all Gradle tasks                     |
 
 ### Code Style & Git Hooks
 
@@ -150,15 +155,16 @@ pnpm format:check      # CI check
 
 Automated dependency updates via `.github/dependabot.yml`:
 
-| Ecosystem        | Directory  | Schedule            |
-| ---------------- | ---------- | ------------------- |
-| `github-actions` | `/`        | Weekly Monday 02:30 |
-| `gradle`         | `/`        | Weekly Monday 03:00 |
-| `gomod`          | `/libcore` | Weekly Monday 03:30 |
+| Ecosystem        | Directory | Schedule            |
+| ---------------- | --------- | ------------------- |
+| `github-actions` | `/`       | Weekly Monday 02:30 |
+| `gradle`         | `/`       | Weekly Monday 03:00 |
+| `npm`            | `/`       | Weekly Monday 03:30 |
 
-- Groups `minor`+`patch` updates, limits PRs (10 for Actions, 5 for Gradle/Go)
-- Ignores major bumps for `com.android.tools.build:gradle`, `kotlin-gradle-plugin`, and `golang.org/x/mobile`
-- Labels: `dependencies`, `github-actions` / `gradle` / `gomod`
+- Groups `minor`+`patch` updates, limits PRs (10 for Actions, 5 for Gradle/npm)
+- Ignores major bumps for `com.android.tools.build:gradle` and `kotlin-gradle-plugin`
+- Labels: `dependencies`, `github-actions` / `gradle` / `npm`
+- `gomod` (libcore) is **disabled** — Go deps use local `replace` (`../external/sing-box`) and are pinned via `COMMIT_SING_BOX` / `COMMIT_BITSBOX_CORE` in `buildScript/lib/core/get_source_env.sh`
 
 ## ⚙️ Configuration
 
