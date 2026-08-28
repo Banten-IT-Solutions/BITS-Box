@@ -47,9 +47,9 @@ updates:
       - dependency-name: "org.jetbrains.kotlin:kotlin-gradle-plugin"
         update-types: ["version-update:semver-major"]
 
-  # ── Go modules (libcore) ────────────────────────────────────────
-  - package-ecosystem: "gomod"
-    directory: "/libcore"
+  # ── npm (formatter / hooks) ─────────────────────────────────────
+  - package-ecosystem: "npm"
+    directory: "/"
     schedule:
       interval: "weekly"
       day: "monday"
@@ -57,16 +57,22 @@ updates:
     open-pull-requests-limit: 5
     labels:
       - "dependencies"
-      - "gomod"
+      - "npm"
     commit-message:
       prefix: "chore(deps):"
     groups:
-      go-deps:
+      npm-deps:
         patterns:
           - "*"
         update-types:
           - "minor"
           - "patch"
-    ignore:
-      - dependency-name: "golang.org/x/mobile"
-        update-types: ["version-update:semver-major"]
+
+  # ── Go modules (libcore) ────────────────────────────────────────
+  # Disabled: libcore/go.mod uses local replace directives
+  # (../external/sing-box, ../external/bits-box-core) which are
+  # fetched via buildScript/lib/core/get_source.sh and are not
+  # resolvable in Dependabot's isolated updater. Go dependencies
+  # are pinned via COMMIT_SING_BOX / COMMIT_BITSBOX_CORE in
+  # buildScript/lib/core/get_source_env.sh.
+  # To update Go deps, bump those commits and run `go mod tidy`.
