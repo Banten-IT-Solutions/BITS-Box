@@ -52,14 +52,23 @@ BITS-Box/
 ├── libcore/                 # Go bindings shared with upstream sing-box
 ├── buildScript/             # Native build & CI scripts (Go, Android, assets)
 ├── buildSrc/                # Gradle build logic (flavors, metadata, signing, APK naming)
-├── .github/workflows/       # CI/CD workflows
+├── .github/
+│   ├── workflows/           # CI/CD workflows (preview, release)
+│   └── dependabot.yml       # Automated dependency updates
 ├── .husky/                  # Git hooks (pre-commit, pre-push)
+├── gradle/                  # Gradle wrapper
 ├── build.gradle.kts         # Top-level Gradle build script
 ├── settings.gradle.kts      # Gradle module settings
 ├── bitsbox.properties       # Build metadata (version, package name)
 ├── .prettierrc.json         # Code formatter config
+├── .prettierignore          # Prettier ignore patterns
 ├── .editorconfig            # Editor style config
+├── .lintstagedrc.json       # Lint-staged config
+├── .npmrc                   # Node package manager config
 ├── package.json             # Formatter & hooks tooling
+├── gradlew                  # Gradle wrapper script (Unix)
+├── gradlew.bat              # Gradle wrapper script (Windows)
+├── lint.xml                 # Android lint config
 └── run                      # Build helper CLI
 ```
 
@@ -79,6 +88,9 @@ BITS-Box/
 ### Build locally
 
 ```bash
+# 0. Install formatter & hooks (optional, for code style)
+pnpm install
+
 # 1. Fetch pinned external sources + init gomobile toolchain
 ./run lib core init
 
@@ -129,6 +141,7 @@ Or using the CLI helper directly:
 | `make format-check`     | Check formatting (Makefile)               |
 | `make check`            | `format-check` + `KSP` + `AAR metadata`   |
 | `make wrapper`          | Update Gradle wrapper                     |
+| `make install-hooks`    | Install git hooks & formatter deps        |
 | `pnpm format`           | Format all files with Prettier            |
 | `pnpm format:check`     | Check formatting without writing          |
 | `pnpm check`            | Format check + Gradle tasks               |
@@ -145,8 +158,9 @@ Or using the CLI helper directly:
 
 ```bash
 pnpm install           # install formatter & hooks (runs husky prepare)
-pnpm format            # manual format
-pnpm format:check      # CI check
+# or: make install-hooks
+pnpm format            # manual format (or: make format)
+pnpm format:check      # CI check  (or: make format-check)
 # hooks run automatically on `git commit` / `git push`
 # skip if needed: HUSKY=0 git commit -m "..."
 ```
