@@ -147,9 +147,11 @@ fun Project.setupApp() {
             }
         }
 
+        // ABI splits for APKs only — must be disabled for AAB (bundle) per https://issuetracker.google.com/402800800
+        val isBundle = gradle.startParameter.taskNames.any { it.contains("bundle", ignoreCase = true) }
         splits.abi {
             reset()
-            isEnable = true
+            isEnable = !isBundle
             isUniversalApk = false
             include("armeabi-v7a")
             include("arm64-v8a")
