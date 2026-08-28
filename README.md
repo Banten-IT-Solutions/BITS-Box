@@ -201,13 +201,6 @@ Or via the `LOCAL_PROPERTIES` environment variable (base64-encoded).
 | `👁️ Preview Build` (`preview.yml`) | `workflow_dispatch`                                        | Preview APKs (artifact)                                  |
 | `🏷️ Release Build` (`release.yml`) | `workflow_dispatch` (with `tag`, `publish`, `play` inputs) | Signed release APKs + optional GitHub release / Play AAB |
 
-Both workflows use icon-prefixed jobs and steps for clarity:
-
-- `🔧 Native Build (LibCore)` → `📥 Checkout`, `☕ Setup JDK 21`, `🤖 Setup Android SDK & NDK`, `📦 Install NDK`, `📂 Fetch pinned native sources`, `🐹 Setup Go`, `🏗️ Build LibCore`
-- `📦 Build BITS Box APK` → `📥 Restore LibCore AAR`, `🔑 Restore Keystore`, `💾 Gradle Cache`, `🏗️ Gradle Build`, `📤 Upload`
-
-See `.github/workflows/` for details.
-
 ### External build inputs
 
 | Input                          | How obtained                                                                | Purpose                      |
