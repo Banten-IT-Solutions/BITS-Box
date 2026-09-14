@@ -65,6 +65,7 @@ jobs:
         with:
           name: bitscore-aar
           path: app/libs/bitscore.aar
+          retention-days: 1
 
   build:
     name: '📦 Build BITS Box APK'
@@ -136,9 +137,11 @@ jobs:
         with:
           name: preview-v7
           path: artifacts/v7/*.apk
+          retention-days: 1
 
       - name: '📤 Upload Preview v8'
         uses: actions/upload-artifact@v7
         with:
           name: preview-v8
           path: artifacts/v8/*.apk
+          retention-days: 1

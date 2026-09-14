@@ -75,6 +75,7 @@ jobs:
         with:
           name: bitscore-aar
           path: app/libs/bitscore.aar
+          retention-days: 1
 
   build:
     name: '📦 Build BITS Box APK'
@@ -156,12 +157,14 @@ jobs:
         with:
           name: release-v7
           path: artifacts/v7/*.apk
+          retention-days: 1
 
       - name: '📤 Upload Release v8'
         uses: actions/upload-artifact@v7
         with:
           name: release-v8
           path: artifacts/v8/*.apk
+          retention-days: 1
 
   publish:
     name: '🚀 Publish Release'
@@ -258,3 +261,4 @@ jobs:
         with:
           name: AAB
           path: app/build/outputs/bundle/playRelease/app-play-release.aab
+          retention-days: 1
