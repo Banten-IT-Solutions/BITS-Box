@@ -73,14 +73,14 @@ dependencies {
     implementation("androidx.work:work-multiprocess:2.11.2")
 
     implementation("com.google.android.material:material:1.14.0")
-    implementation("com.google.code.gson:gson:2.14.0")
+    implementation("com.google.code.gson:gson:2.15.0")
 
     implementation("com.github.jenly1314:zxing-lite:3.5.0")
     implementation("com.blacksquircle.ui:editorkit:2.9.0")
     implementation("com.blacksquircle.ui:language-base:2.9.0")
     implementation("com.blacksquircle.ui:language-json:2.9.0")
 
-    implementation("com.squareup.okhttp3:okhttp:5.5.0")
+    implementation("com.squareup.okhttp3:okhttp:5.5.1")
     implementation("org.yaml:snakeyaml:2.7")
     implementation("com.jakewharton:process-phoenix:3.0.0")
     implementation("com.esotericsoftware:kryo:5.7.1")
